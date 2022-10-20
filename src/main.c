@@ -306,7 +306,7 @@ void __init_param(t_window *win, t_map *map, t_param *p)
 	p->map = map;
 	p->dir.x = 0;
 	p->dir.y = -1;
-	p->plane.x = 1; 
+	p->plane.x = 0.66; 
 	p->plane.y = 0;
 }
 
