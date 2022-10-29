@@ -337,6 +337,8 @@ int main(int ac, char **av)
   printf("WEST TEXTURE : %s\n", get_texture(map_data, "WE"));
   printf("SOUTH TEXTURE : %s\n", get_texture(map_data, "SO"));
   printf("NORTH TEXTURE : %s\n", get_texture(map_data, "NO"));
+  printf("FLOOR COLOR : %s\n", get_color(map_data, 'F'));
+  printf("CEILLING COLOR : %s\n", get_color(map_data, 'C'));
   return (0);
   __init_win(720, 720, &win);
 	__init_map(&map);

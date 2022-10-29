@@ -62,3 +62,30 @@ char *get_texture(char **map, char *texture_id)
   }
   return (NULL);
 }
+
+char *get_color(char **map, char id){
+  int len;
+  int i;
+  int j;
+  char *color;
+  
+  if(!map)
+    return (NULL);
+  i = 0;
+  j = 0;
+  while(map[i]){
+    if(map[i] && map[i][0] == id){
+      j = 1;
+      while(map[i][j] && map[i][j] == ' ')
+        j++;
+      len = ft_strlen(&map[i][j]);
+      color = (char *)malloc(sizeof(char) * len);
+      if(!color)
+        return (NULL);
+      ft_strcpy(&map[i][j], color);
+      return (color);
+    } 
+    i++;
+  }
+  return (NULL);
+}

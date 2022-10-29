@@ -27,4 +27,5 @@ int check_args(int ac, char **av);
 char *get_next_line(int fd);
 char **read_map(char *filename);
 char *get_texture(char **map, char *texture_id);
+char *get_color(char **map, char id);
 #endif
