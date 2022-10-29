@@ -311,13 +311,30 @@ void __init_param(t_window *win, t_map *map, t_param *p)
 }
 
 
-int main()
+int main(int ac, char **av)
 {
 	t_map		map;
 	t_window	win;
 	t_param		p;
+  int map_fd;
+  char **map_data;
 
-	__init_win(720, 720, &win);
+  map_fd = check_args(ac, av);
+  if(map_fd == -1){
+    printf("Error: Invalid Map !\n");
+    return (1);
+  }
+  map_data = read_map(av[1]);
+	if(!map_data){
+    printf("Error: Invalid Map file");
+  }
+  int i = 0;
+  while(map_data[i]){
+    printf("map : %s\n", map_data[i]);
+    i++;
+  }
+  return (0);
+  __init_win(720, 720, &win);
 	__init_map(&map);
 	__init_param(&win, &map, &p);
 	draw_walls(&p);
