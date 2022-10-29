@@ -26,5 +26,5 @@ void draw_grid(t_map *map, int *image);
 int check_args(int ac, char **av);
 char *get_next_line(int fd);
 char **read_map(char *filename);
-
+char *get_texture(char **map, char *texture_id);
 #endif

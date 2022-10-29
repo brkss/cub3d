@@ -12,7 +12,6 @@ int count_map_lines(char *filename){
   fd = open(filename, O_RDONLY);
   line = get_next_line(fd);
   while(line){
-    printf("->%s \n",line);
     line = get_next_line(fd);
     line_count++;
   }

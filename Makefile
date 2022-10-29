@@ -1,7 +1,7 @@
 
 NAME =  cube3
 
-SRC =  src/cube3d.c src/main.c src/map.c src/check.c src/gnl/get_next_line.c src/gnl/get_next_line_utils.c src/parser.c
+SRC =  src/cube3d.c src/main.c src/map.c src/check.c src/gnl/get_next_line.c src/gnl/get_next_line_utils.c src/parser.c src/map_info.c
 
 OBJ = ${SRC:%.c=%.o}
 
