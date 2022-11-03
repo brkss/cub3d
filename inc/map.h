@@ -28,4 +28,5 @@ char *get_next_line(int fd);
 char **read_map(char *filename);
 char *get_texture(char **map, char *texture_id);
 char *get_color(char **map, char id);
+char **remove_row_map(char **map, int row_index);
 #endif
