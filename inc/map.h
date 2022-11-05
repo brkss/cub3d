@@ -29,4 +29,5 @@ char **read_map(char *filename);
 char *get_texture(char **map, char *texture_id);
 char *get_color(char **map, char id);
 char **remove_row_map(char **map, int row_index);
+int check_extension(char *filename);
 #endif

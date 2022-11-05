@@ -317,28 +317,28 @@ int main(int ac, char **av)
 	t_window	win;
 	t_param		p;
   int map_fd;
-  char **map_data;
+  char **scene;
 
   map_fd = check_args(ac, av);
-  if(map_fd == -1){
+  if(map_fd == -1 || !check_extension(av[1])){
     printf("Error: Invalid Map !\n");
     return (1);
   }
-  map_data = read_map(av[1]);
-	if(!map_data){
+  scene = read_map(av[1]);
+	if(!scene){
     printf("Error: Invalid Map file");
   }
   int i = 0;
-  while(map_data[i]){
+  while(scene[i]){
     //printf("map : %s\n", map_data[i]);
     i++;
   }
-  printf("EAST TEXTURE : %s\n", get_texture(map_data, "EA"));
-  printf("WEST TEXTURE : %s\n", get_texture(map_data, "WE"));
-  printf("SOUTH TEXTURE : %s\n", get_texture(map_data, "SO"));
-  printf("NORTH TEXTURE : %s\n", get_texture(map_data, "NO"));
-  printf("FLOOR COLOR : %s\n", get_color(map_data, 'F'));
-  printf("CEILLING COLOR : %s\n", get_color(map_data, 'C'));
+  printf("EAST TEXTURE : %s\n", get_texture(scene, "EA"));
+  printf("WEST TEXTURE : %s\n", get_texture(scene, "WE"));
+  printf("SOUTH TEXTURE : %s\n", get_texture(scene, "SO"));
+  printf("NORTH TEXTURE : %s\n", get_texture(scene, "NO"));
+  printf("FLOOR COLOR : %s\n", get_color(scene, 'F'));
+  printf("CEILLING COLOR : %s\n", get_color(scene, 'C'));
   return (0);
   __init_win(720, 720, &win);
 	__init_map(&map);
