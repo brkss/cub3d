@@ -3,6 +3,13 @@
 
 #include "./libft.h"
 
+# define WEST_TEXTURE 1
+# define EAST_TEXTURE 2
+# define SOUTH_TEXTURE 3
+# define NORTH_TEXTURE 4
+# define FLOOR_COLOR 5
+# define CEILLING_COLOR 6
+
 typedef struct s_map
 {
 	int mapHigth;
@@ -29,9 +36,7 @@ int check_args(int ac, char **av);
 char *get_next_line(int fd);
 t_list *read_map(char *filename);
 //char **read_map(char *filename);
-char *get_texture(char **map, char *texture_id);
-char *get_color(char **map, char id);
-char **remove_row_map(char **map, int row_index);
+//char *get_texture(char **map, char *texture_id);
+//char *get_color(char **map, char id);
 int check_extension(char *filename);
-char **get_map(char **scene);
 #endif
