@@ -3,18 +3,6 @@
 #include "../inc/map.h"
 #include "../inc/header.h"
 
-static int ft_strlen(char *s)
-{
-  int l;
-
-  if(!s)
-    return (0);
-  l = 0;
-  while(s[l])
-    l++;
-  return (l);
-}
-
 // take src and dest copy src to dest and terminate dest with \0
 // note that must be allocated before !
 static void ft_strcpy(char *src, char *dest)
@@ -85,6 +73,19 @@ char *get_color(char **map, char id){
       ft_strcpy(&map[i][j], color);
       return (color);
     } 
+    i++;
+  }
+  return (NULL);
+}
+
+char **get_map(char **scene)
+{
+  int i;
+
+  i = 0;
+  while(scene[i])
+  {
+    printf("len : %zu\n", ft_strlen(scene[i]));
     i++;
   }
   return (NULL);

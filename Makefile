@@ -13,21 +13,30 @@ MLX_LINK = -L /usr/X11/lib -lmlx -framework OpenGL -framework AppKit
 
 COMPILER = gcc 
 
-
-all: $(NAME)
+all: lib $(NAME) 
 
 %.o:%.c
 	$(COMPILER) -c $(FLAGS) $(MLX_INC) $< -o $@
 
-
 $(NAME): $(OBJ)
-	$(COMPILER) $(FLAGS)  $(OBJ)  $(MLX_LINK) -o $@
+	$(COMPILER) $(FLAGS)  $(OBJ) -L ./libft -lft $(MLX_LINK) -o $@
 
-clean:
+lib:
+	@echo "compiling libft"
+	make -C ./libft
+	make bonus -C ./libft
+
+clean: libftclean
 	rm -rf $(OBJ)
 
-fclean: clean
+libftclean:
+	make clean -C ./libft
+
+fclean: libftfclean clean
 	rm -rf $(NAME)
+
+libftfclean:
+	make fclean -C ./libft
 
 re: fclean all
 

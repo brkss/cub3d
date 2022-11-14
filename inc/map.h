@@ -1,6 +1,8 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "./libft.h"
+
 typedef struct s_map
 {
 	int mapHigth;
@@ -25,9 +27,11 @@ void draw_grid(t_map *map, int *image);
 
 int check_args(int ac, char **av);
 char *get_next_line(int fd);
-char **read_map(char *filename);
+t_list *read_map(char *filename);
+//char **read_map(char *filename);
 char *get_texture(char **map, char *texture_id);
 char *get_color(char **map, char id);
 char **remove_row_map(char **map, int row_index);
 int check_extension(char *filename);
+char **get_map(char **scene);
 #endif

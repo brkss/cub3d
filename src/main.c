@@ -317,7 +317,7 @@ int main(int ac, char **av)
 	t_window	win;
 	t_param		p;
   int map_fd;
-  char **scene;
+  t_list *scene;
 
   map_fd = check_args(ac, av);
   if(map_fd == -1 || !check_extension(av[1])){
@@ -328,18 +328,23 @@ int main(int ac, char **av)
 	if(!scene){
     printf("Error: Invalid Map file");
   }
-  int i = 0;
-  while(scene[i]){
-    //printf("map : %s\n", map_data[i]);
-    i++;
+  //int i = 0;
+  t_list *tmp = scene; 
+  while(tmp){
+    printf("-> %s\n", tmp->content);
+    tmp = tmp->next;
   }
+  return 0;
+  /*
   printf("EAST TEXTURE : %s\n", get_texture(scene, "EA"));
   printf("WEST TEXTURE : %s\n", get_texture(scene, "WE"));
   printf("SOUTH TEXTURE : %s\n", get_texture(scene, "SO"));
   printf("NORTH TEXTURE : %s\n", get_texture(scene, "NO"));
   printf("FLOOR COLOR : %s\n", get_color(scene, 'F'));
   printf("CEILLING COLOR : %s\n", get_color(scene, 'C'));
+  get_map(scene);
   return (0);
+  */
   __init_win(720, 720, &win);
 	__init_map(&map);
 	__init_param(&win, &map, &p);
