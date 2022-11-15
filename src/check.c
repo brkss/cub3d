@@ -16,7 +16,7 @@ int check_args(int ac, char **av)
   fd = open(av[1], O_RDONLY);
   return (fd);
 }
-
+/*
 static int ft_strlen(char *s)
 {
   int l;
@@ -28,7 +28,7 @@ static int ft_strlen(char *s)
     l++;
   return (l);
 }
-
+*/
 int check_extension(char *filename)
 {
   int len;

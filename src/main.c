@@ -334,6 +334,7 @@ int main(int ac, char **av)
     printf("-> %s\n", tmp->content);
     tmp = tmp->next;
   }
+  scan_scene(scene);
   return 0;
   /*
   printf("EAST TEXTURE : %s\n", get_texture(scene, "EA"));

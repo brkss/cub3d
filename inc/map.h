@@ -19,8 +19,8 @@ typedef struct s_map
 
 typedef struct s_mapdata
 {
-  int ceilling_color[3];
-  int floor_color[3];
+  char *ceilling_color;
+  char *floor_color;
   char *north_tx;
   char *west_tx;
   char *east_tx;
@@ -39,4 +39,5 @@ t_list *read_map(char *filename);
 //char *get_texture(char **map, char *texture_id);
 //char *get_color(char **map, char id);
 int check_extension(char *filename);
+t_mapdata *scan_scene(t_list *head);
 #endif
