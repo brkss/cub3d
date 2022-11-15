@@ -19,8 +19,8 @@ typedef struct s_map
 
 typedef struct s_mapdata
 {
-  char *ceilling_color;
-  char *floor_color;
+  int *ceilling_color;
+  int *floor_color;
   char *north_tx;
   char *west_tx;
   char *east_tx;

@@ -24,5 +24,6 @@ typedef struct s_window
 }t_window;
 
 void __init_win(int heigth, int width, t_window *win);
+void exit_log(char const *err);
 
 #endif

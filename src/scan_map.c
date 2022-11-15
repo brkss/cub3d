@@ -28,6 +28,69 @@ void get_texture(char *line, t_mapdata *data, int res)
   return ;
 }
 
+static int arr_len(char **arr)
+{
+  int len;
+
+  if(!arr)
+    return (0);
+  len = 0;
+  while(arr[len])
+    len++;
+  return (len);
+}
+
+int *convert_color(char *color)
+{
+  int *res;
+  int len;
+  char *trimmed;
+  char **colors;
+
+  len = ft_strlen(color);
+  if(!color || len == 0)
+    exit_log(NULL);
+  trimmed = ft_strtrim(color, " ");
+  if(!trimmed)
+    exit_log("Invalid scene");
+  free(color);
+  colors = ft_split(trimmed, ',');
+  if(!colors)
+    exit_log("Invalid scene");
+  free(trimmed);
+  if(arr_len(colors) < 3)
+    exit_log("Invalid colors");
+  res = (int *)malloc(sizeof(int) * 3);
+  if(!res)
+    exit_log(NULL);
+  res[0] = ft_atoi(colors[0]);
+  res[1] = ft_atoi(colors[1]);
+  res[2] = ft_atoi(colors[2]);
+  return (res);
+}
+
+void get_color(char *line, t_mapdata *data, int res)
+{
+  char *val;
+  int len;
+  int i;
+
+  if(!line)
+    return;
+  len = ft_strlen(line);
+  i = 1;
+  while(line && len > 2 && line[i] == ' ')
+    i++;
+  val = ft_strdup(&line[i]);
+  if(!val)
+    return ;
+  if(res == CEILLING_COLOR)
+    data->ceilling_color = convert_color(val);
+  else if(res == FLOOR_COLOR)
+    data->floor_color = convert_color(val);
+  return ;
+}
+
 int is_testure(char *line)
 {
   if(line && ft_strlen(line) >= 2 && line[0] == 'N' && line[1] == 'O')
@@ -38,10 +101,10 @@ int is_testure(char *line)
     return WEST_TEXTURE;
   else if(line && ft_strlen(line) >= 2 && line[0] == 'E' && line[1] == 'A')
     return EAST_TEXTURE;
-  //if(line && ft_strlen(line) >= 1 && line[0] == 'F')
-    //return FLOOR_COLOR;
-  //if(line && ft_strlen(line) >= 1 && line[0] == 'C')
-    //return CEILLING_COLOR;
+  if(line && ft_strlen(line) >= 1 && line[0] == 'F')
+    return FLOOR_COLOR;
+  if(line && ft_strlen(line) >= 1 && line[0] == 'C')
+    return CEILLING_COLOR;
   return (0);
 }
 
@@ -76,9 +139,9 @@ t_mapdata *scan_scene(t_list *head)
     res = is_testure(curr->content); 
     if(res == WEST_TEXTURE || res == EAST_TEXTURE
         || res == SOUTH_TEXTURE || res == NORTH_TEXTURE)
-    {
       get_texture(curr->content, data, res);
-    }
+    if (res == FLOOR_COLOR || res == CEILLING_COLOR)
+      get_color(curr->content, data, res);
     //prv = curr;
     curr = curr->next;
   }
@@ -86,5 +149,7 @@ t_mapdata *scan_scene(t_list *head)
   printf("map data east : %s\n", data->east_tx);
   printf("map data north : %s\n", data->north_tx);
   printf("map data south : %s\n", data->south_tx);
+  printf("map floor color : %d, %d, %d\n", data->floor_color[0], data->floor_color[1], data->floor_color[2]);
+  printf("map ceilling color : %d, %d, %d\n", data->ceilling_color[0], data->ceilling_color[1], data->ceilling_color[2]);
   return (NULL);
 }
