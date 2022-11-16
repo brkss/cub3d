@@ -9,6 +9,7 @@
 # define NORTH_TEXTURE 4
 # define FLOOR_COLOR 5
 # define CEILLING_COLOR 6
+# define EMPTY_LINE -1
 
 typedef struct s_map
 {
@@ -27,6 +28,7 @@ typedef struct s_mapdata
   char *south_tx;
   int mapH;
   int mapW;
+  t_list *map;
 }t_mapdata;
 
 void __init_map(t_map *map);

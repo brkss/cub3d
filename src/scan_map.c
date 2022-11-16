@@ -28,6 +28,13 @@ void get_texture(char *line, t_mapdata *data, int res)
   return ;
 }
 
+static int check_color_range(int color)
+{
+  if(color >= 0 && color <= 255)
+    return (1);
+  return (0);
+}
+
 static int arr_len(char **arr)
 {
   int len;
@@ -42,7 +49,7 @@ static int arr_len(char **arr)
 
 int *convert_color(char *color)
 {
-  int *res;
+int *res;
   int len;
   char *trimmed;
   char **colors;
@@ -66,6 +73,9 @@ int *convert_color(char *color)
   res[0] = ft_atoi(colors[0]);
   res[1] = ft_atoi(colors[1]);
   res[2] = ft_atoi(colors[2]);
+  if(!check_color_range(res[0]) || !check_color_range(res[1])
+      || !check_color_range(res[2]))
+    exit_log("Invalid color");
   return (res);
 }
 
@@ -91,8 +101,10 @@ void get_color(char *line, t_mapdata *data, int res)
   return ;
 }
 
-int is_testure(char *line)
+int is_map_info(char *line)
 {
+  if(line && ft_strlen(line) == 0)
+    return EMPTY_LINE;
   if(line && ft_strlen(line) >= 2 && line[0] == 'N' && line[1] == 'O')
     return NORTH_TEXTURE;
   else if(line && ft_strlen(line) >= 2 && line[0] == 'S' && line[1] == 'O')
@@ -116,13 +128,34 @@ void __init_mapdata(t_mapdata *data)
   data->west_tx = NULL;
   data->south_tx = NULL;
   data->east_tx = NULL;
+  data->map = NULL;
+}
+
+void get_map(t_mapdata *data, t_list *scene)
+{
+  
+  t_list *curr;
+
+  if(!data || !scene)
+    return;
+  curr = scene;
+  while(curr && ft_strlen(curr->content) == 0) 
+    curr = curr->next;
+  data->map = curr;
+}
+
+int got_all_data(t_mapdata *data)
+{
+  if(data->ceilling_color && data->floor_color && data->north_tx
+      && data->west_tx && data->east_tx && data->south_tx)
+    return (1);
+  return (0);
 }
 
 t_mapdata *scan_scene(t_list *head)
 {
   t_mapdata *data;
   t_list *curr;
-  //t_list *prv;
   int res;
 
   if(!head)
@@ -131,25 +164,21 @@ t_mapdata *scan_scene(t_list *head)
   if(!data)
     return (NULL);
   __init_mapdata(data);
-    
   curr = head;
-  //prv = NULL;
   while(curr)
   {
-    res = is_testure(curr->content); 
+    res = is_map_info(curr->content); 
     if(res == WEST_TEXTURE || res == EAST_TEXTURE
         || res == SOUTH_TEXTURE || res == NORTH_TEXTURE)
       get_texture(curr->content, data, res);
-    if (res == FLOOR_COLOR || res == CEILLING_COLOR)
+    else if (res == FLOOR_COLOR || res == CEILLING_COLOR)
       get_color(curr->content, data, res);
-    //prv = curr;
+    else if(got_all_data(data))
+    {
+      get_map(data, curr);
+      return data;
+    }
     curr = curr->next;
   }
-  printf("map data west : %s\n", data->west_tx);
-  printf("map data east : %s\n", data->east_tx);
-  printf("map data north : %s\n", data->north_tx);
-  printf("map data south : %s\n", data->south_tx);
-  printf("map floor color : %d, %d, %d\n", data->floor_color[0], data->floor_color[1], data->floor_color[2]);
-  printf("map ceilling color : %d, %d, %d\n", data->ceilling_color[0], data->ceilling_color[1], data->ceilling_color[2]);
   return (NULL);
 }

@@ -318,6 +318,7 @@ int main(int ac, char **av)
 	t_param		p;
   int map_fd;
   t_list *scene;
+  t_mapdata *data;
 
   map_fd = check_args(ac, av);
   if(map_fd == -1 || !check_extension(av[1])){
@@ -334,7 +335,19 @@ int main(int ac, char **av)
     printf("-> %s\n", tmp->content);
     tmp = tmp->next;
   }
-  scan_scene(scene);
+  data = scan_scene(scene);
+  if(!data)
+    exit_log("Missing data");
+  printf("west : %s\n", data->west_tx);
+  printf("east : %s\n", data->east_tx);
+  printf("south  : %s\n", data->south_tx);
+  printf("north : %s\n", data->north_tx);
+  t_list *curr = data->map;
+  while(curr)
+  {
+    printf("->%s\n", curr->content);
+    curr = curr->next;
+  }
   return 0;
   /*
   printf("EAST TEXTURE : %s\n", get_texture(scene, "EA"));
