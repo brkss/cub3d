@@ -28,7 +28,7 @@ typedef struct s_mapdata
   char *south_tx;
   int mapH;
   int mapW;
-  t_list *map;
+  char **map;
 }t_mapdata;
 
 void __init_map(t_map *map);
@@ -42,4 +42,5 @@ t_list *read_map(char *filename);
 //char *get_color(char **map, char id);
 int check_extension(char *filename);
 t_mapdata *scan_scene(t_list *head);
+char **convert_map(t_list *map_chain); 
 #endif

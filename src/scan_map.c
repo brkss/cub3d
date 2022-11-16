@@ -141,7 +141,7 @@ void get_map(t_mapdata *data, t_list *scene)
   curr = scene;
   while(curr && ft_strlen(curr->content) == 0) 
     curr = curr->next;
-  data->map = curr;
+  data->map = convert_map(curr);
 }
 
 int got_all_data(t_mapdata *data)

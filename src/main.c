@@ -342,11 +342,11 @@ int main(int ac, char **av)
   printf("east : %s\n", data->east_tx);
   printf("south  : %s\n", data->south_tx);
   printf("north : %s\n", data->north_tx);
-  t_list *curr = data->map;
-  while(curr)
+  int i = 0;
+  while(data->map && data->map[i])
   {
-    printf("->%s\n", curr->content);
-    curr = curr->next;
+    printf("-> %s\n", data->map[i]);
+    i++;
   }
   return 0;
   /*
