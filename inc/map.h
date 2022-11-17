@@ -43,4 +43,5 @@ t_list *read_map(char *filename);
 int check_extension(char *filename);
 t_mapdata *scan_scene(t_list *head);
 char **convert_map(t_list *map_chain); 
+int check_map(char **map);
 #endif

@@ -348,6 +348,8 @@ int main(int ac, char **av)
     printf("-> %s\n", data->map[i]);
     i++;
   }
+  if(!check_map(data->map))
+    exit_log("Invalid map");
   return 0;
   /*
   printf("EAST TEXTURE : %s\n", get_texture(scene, "EA"));
