@@ -1,6 +1,4 @@
 
-
-
 #include "../inc/header.h"
 
 // return file descriptor to map file 
@@ -16,19 +14,7 @@ int check_args(int ac, char **av)
   fd = open(av[1], O_RDONLY);
   return (fd);
 }
-/*
-static int ft_strlen(char *s)
-{
-  int l;
 
-  if(!s)
-    return (0);
-  l = 0;
-  while(s[l])
-    l++;
-  return (l);
-}
-*/
 int check_extension(char *filename)
 {
   int len;

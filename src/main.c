@@ -110,7 +110,6 @@ void get_dist_x_y(double *dist_x, double *dist_y, t_param *p, t_vector *delta, t
 	{
 		*dist_x = (gridx + 1.0 - p->x) * delta->x;
 		step->x = 1;
-
 	}
 	if (p->ray->y < 0)
 	{
