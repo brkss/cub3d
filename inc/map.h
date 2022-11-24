@@ -15,7 +15,7 @@ typedef struct s_map
 {
 	int mapHigth;
 	int mapWidth;
-	int grid[24][24];
+	char **grid;
 }t_map;
 
 typedef struct s_mapdata
@@ -29,9 +29,10 @@ typedef struct s_mapdata
   int mapH;
   int mapW;
   char **map;
+
 }t_mapdata;
 
-void __init_map(t_map *map);
+void __init_map(t_map *map, char **grid);
 void draw_grid(t_map *map, int *image);
 
 int check_args(int ac, char **av);

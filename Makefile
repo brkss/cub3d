@@ -1,7 +1,7 @@
 
 NAME =  cube3
 
-SRC =  src/cube3d.c src/main.c src/map.c src/check.c src/gnl/get_next_line.c src/gnl/get_next_line_utils.c src/map_reader.c src/scene_info.c src/check_map.c src/exit.c
+SRC =  src/cube3d.c src/main.c src/check.c src/gnl/get_next_line.c src/gnl/get_next_line_utils.c src/map_reader.c src/scene_info.c src/check_map.c src/exit.c
 OBJ = ${SRC:%.c=%.o}
 
 FLAGS = -Wall -Werror -Wextra
