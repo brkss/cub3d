@@ -1,6 +1,5 @@
 #include "../inc/map.h"
 #include "../inc/header.h"
-#include <stdio.h>
 
 void __init_win(int heigth, int width, t_window *win)
 {

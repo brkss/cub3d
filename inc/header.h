@@ -2,6 +2,11 @@
 #define HEADER_H
 
 #include <mlx.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include "./libft.h"
 
 typedef struct s_window
 {
@@ -19,5 +24,6 @@ typedef struct s_window
 }t_window;
 
 void __init_win(int heigth, int width, t_window *win);
+void exit_log(char const *err);
 
 #endif

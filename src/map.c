@@ -37,5 +37,3 @@ void __init_map(t_map *map)
 	map->mapWidth = 24;
 	memmove(map->grid, grid, sizeof(grid));
 }
-
-

@@ -1,8 +1,7 @@
 
 NAME =  cube3
 
-SRC =  src/cube3d.c src/main.c src/map.c
-
+SRC =  src/cube3d.c src/main.c src/map.c src/check.c src/gnl/get_next_line.c src/gnl/get_next_line_utils.c src/map_reader.c src/scene_info.c src/check_map.c src/exit.c
 OBJ = ${SRC:%.c=%.o}
 
 FLAGS = -Wall -Werror -Wextra
@@ -13,21 +12,30 @@ MLX_LINK = -L /usr/X11/lib -lmlx -framework OpenGL -framework AppKit
 
 COMPILER = gcc 
 
-
-all: $(NAME)
+all: lib $(NAME) 
 
 %.o:%.c
 	$(COMPILER) -c $(FLAGS) $(MLX_INC) $< -o $@
 
-
 $(NAME): $(OBJ)
-	$(COMPILER) $(FLAGS)  $(OBJ)  $(MLX_LINK) -o $@
+	$(COMPILER) $(FLAGS)  $(OBJ) -L ./libft -lft $(MLX_LINK) -o $@
 
-clean:
+lib:
+	@echo "compiling libft"
+	make -C ./libft
+	make bonus -C ./libft
+
+clean: libftclean
 	rm -rf $(OBJ)
 
-fclean: clean
+libftclean:
+	make clean -C ./libft
+
+fclean: libftfclean clean
 	rm -rf $(NAME)
+
+libftfclean:
+	make fclean -C ./libft
 
 re: fclean all
 

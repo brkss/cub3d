@@ -311,11 +311,42 @@ void __init_param(t_window *win, t_map *map, t_param *p)
 }
 
 
-int main()
+int main(int ac, char **av)
 {
-	t_map		map;
+	
+
+		t_map		map;
 	t_window	win;
 	t_param		p;
+  int map_fd;
+  t_list *scene;
+  t_mapdata *data;
+
+  // START CHECKING SCENE 👀
+  map_fd = check_args(ac, av);
+  if(map_fd == -1 || !check_extension(av[1])){
+    printf("Error: Invalid Map !\n");
+    return (1);
+  }
+  scene = read_map(av[1]);
+	if(!scene){
+    printf("Error: Invalid Map file");
+  }
+  //int i = 0;
+  t_list *tmp = scene; 
+  while(tmp){
+    printf("-> %s\n", tmp->content);
+    tmp = tmp->next;
+  }
+  data = scan_scene(scene);
+  if(!data)
+    exit_log("Missing data");
+  if(!data->west_tx || !data->north_tx
+    || !data->east_tx || !data->south_tx)
+    exit_log("Invalid Textures !");
+  if(!check_map(data->map))
+    exit_log("Invalid map");
+  // END CHECKING SCENE 
 
 	__init_win(720, 720, &win);
 	__init_map(&map);
@@ -330,3 +361,4 @@ int main()
 	//mlx_loop_hook(win.mlx_ptr, draw_walls, &p);
 	//mlx_do_key_autorepeaton(win.mlx_ptr);
 }
+
