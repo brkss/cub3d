@@ -134,6 +134,8 @@ int check_player(char **map)
   while(map[i])
   {
     j = 0;
+    while(map[i][j] && map[i][j] != ' ')
+        j++;
     while(map[i][j])
     {
       if(map[i][j] == 'N' || map[i][j] == 'W'
@@ -143,7 +145,9 @@ int check_player(char **map)
           return (0);
         player_exist = 1;
       }
-      else if(map[i][j] != '1' && map[i][j] != '0')
+      else if (map[i][j] == '0' &&  map[i][j + 1] && map[i][j] == ' ')
+            return (0);
+      else if(map[i][j] != '1' && map[i][j] != '0' && j > 0 && map[i][j - 1] != '1')
       {
         return (0);
       }
