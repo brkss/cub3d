@@ -1,6 +1,6 @@
 
-F 220,100,0
-C 225,30,0
+F 100,200,0
+C 0,0,255 
 
 
 NO ./path_to_the_north_texture

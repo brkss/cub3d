@@ -36,13 +36,22 @@ typedef struct param
 	t_window *win;
 	t_window *win3d;
 	t_map  *map;
+  t_mapdata *data;  
 }t_param;
-
-void draw_ceil_floor(int *image)
+ 
+// doc https://harm-smits.github.io/42docs/libs/minilibx/colors.html#encoding-and-decoding-colors
+int	create_trgb(int t, int r, int g, int b)
 {
-	int ceil_color = 0xABD7EB;
-	int floor_color = 0x808080;
-	int image_size = 720 * 720;
+  return (t << 24 | r << 16 | g << 8 | b);
+}
+
+void draw_ceil_floor(int *image, t_mapdata *data)
+{
+	(void)data;
+  //printf("access colors !\n");
+  int ceil_color = create_trgb(1, data->ceilling_color[0], data->ceilling_color[1], data->ceilling_color[2]);
+	int floor_color = create_trgb(1, data->floor_color[0], data->floor_color[1], data->floor_color[2]);
+  int image_size = 720 * 720;
 	for (int i = 0; i < image_size; i++)
 	{
 		image[i] = (i < image_size /2 ) ? ceil_color : floor_color;
@@ -201,7 +210,9 @@ void cast_rays(t_param *p)
 
 int draw_walls(t_param *p)
 {
-	draw_ceil_floor(p->win->mlx_win_image);
+  //(void)data;
+  //printf("ceilling : %d, %d, %d", data->ceilling_color[0], data->ceilling_color[1], data->ceilling_color[2]);
+  draw_ceil_floor(p->win->mlx_win_image, p->data);
 	cast_rays(p);
 	mlx_put_image_to_window(p->win->mlx_ptr, p->win->mlx_win_ptr, p->win->image, 0, 0);
 	return (1);
@@ -341,6 +352,7 @@ int main(int ac, char **av)
     exit_log("Invalid map");
   // END CHECKING SCENE 
 
+  p.data = data;
 	__init_win(720, 720, &win);
 	__init_map(&map);
 	__init_param(&win, &map, &p);
