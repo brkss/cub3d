@@ -110,6 +110,7 @@ void get_dist_x_y(double *dist_x, double *dist_y, t_param *p, t_vector *delta, t
 	{
 		*dist_x = (gridx + 1.0 - p->x) * delta->x;
 		step->x = 1;
+
 	}
 	if (p->ray->y < 0)
 	{
@@ -312,7 +313,9 @@ void __init_param(t_window *win, t_map *map, t_param *p)
 
 int main(int ac, char **av)
 {
-	t_map		map;
+	
+
+		t_map		map;
 	t_window	win;
 	t_param		p;
   int map_fd;
@@ -345,7 +348,7 @@ int main(int ac, char **av)
     exit_log("Invalid map");
   // END CHECKING SCENE 
 
-  __init_win(720, 720, &win);
+	__init_win(720, 720, &win);
 	__init_map(&map);
 	__init_param(&win, &map, &p);
 	draw_walls(&p);
@@ -358,3 +361,4 @@ int main(int ac, char **av)
 	//mlx_loop_hook(win.mlx_ptr, draw_walls, &p);
 	//mlx_do_key_autorepeaton(win.mlx_ptr);
 }
+
