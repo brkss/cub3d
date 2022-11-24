@@ -314,8 +314,7 @@ void __init_param(t_window *win, t_map *map, t_param *p)
 int main(int ac, char **av)
 {
 	
-
-		t_map		map;
+	t_map		map;
 	t_window	win;
 	t_param		p;
   int map_fd;
@@ -331,12 +330,6 @@ int main(int ac, char **av)
   scene = read_map(av[1]);
 	if(!scene){
     printf("Error: Invalid Map file");
-  }
-  //int i = 0;
-  t_list *tmp = scene; 
-  while(tmp){
-    printf("-> %s\n", tmp->content);
-    tmp = tmp->next;
   }
   data = scan_scene(scene);
   if(!data)
