@@ -11,29 +11,19 @@
 # define CEILLING_COLOR 6
 # define EMPTY_LINE -1
 
-typedef struct s_map
-{
-	int mapHigth;
-	int mapWidth;
-	char **grid;
-}t_map;
-
 typedef struct s_mapdata
 {
-  int *ceilling_color;
-  int *floor_color;
-  char *north_tx;
-  char *west_tx;
-  char *east_tx;
-  char *south_tx;
-  int mapH;
-  int mapW;
-  char **map;
+		int *ceilling_color;
+		int *floor_color;
+		char *north_tx;
+		char *west_tx;
+		char *east_tx;
+		char *south_tx;
+		int mapH;
+		int mapW;
+		char **map;
 
 }t_mapdata;
-
-void __init_map(t_map *map, char **grid);
-void draw_grid(t_map *map, int *image);
 
 int check_args(int ac, char **av);
 char *get_next_line(int fd);

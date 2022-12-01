@@ -1,16 +1,6 @@
 #include "../inc/map.h"
 #include "../inc/header.h"
 
-void __init_win(int heigth, int width, t_window *win)
-{
-	win->mlx_ptr = mlx_init();
-	win->mlx_win_ptr = mlx_new_window(win->mlx_ptr, heigth, width, "HELLO");
-	win->image = mlx_new_image(win->mlx_ptr, heigth , width );
-	win->mlx_win_image = 
-		(int *)mlx_get_data_addr(win->image, &win->bits_per_pixel, &win->size_line, &win->endian);
-	win->win_width = width;
-	win->win_higth = heigth;
-}
 
 void draw_grid(t_map *map, int *image)
 {

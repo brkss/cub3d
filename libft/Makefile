@@ -30,8 +30,8 @@ FLAGS		=	-Wall -Werror -Wextra
 all: $(NAME)
 
 %.o: %.c
-	cc $(FLAGS) -c $< -o  ${<:.c=.o}
-	ar rcs $(NAME) ${<:.c=.o}
+	@cc $(FLAGS) -c $< -o  ${<:.c=.o}
+	@ar rcs $(NAME) ${<:.c=.o}
 
 $(NAME): $(objs)
 
@@ -39,10 +39,10 @@ $(NAME): $(objs)
 bonus: $(bobjs)
 
 clean:
-	rm -f $(objs) $(bobjs)
+	@rm -f $(objs) $(bobjs)
 
 fclean: clean
-	rm -f libft.a
+	@rm -f libft.a
 
 re: fclean all
 

@@ -1,8 +1,12 @@
 
 NAME =  cube3
 
-SRC =  src/cube3d.c src/main.c src/check.c src/gnl/get_next_line.c src/gnl/get_next_line_utils.c src/map_reader.c src/scene_info.c src/check_map.c src/exit.c
+CASTER_SOURCE = src/main.c src/moves.c src/initers.c src/caster_utils.c 
+
+SRC = src/check.c src/gnl/get_next_line.c src/gnl/get_next_line_utils.c src/map_reader.c src/scene_info.c src/check_map.c src/exit.c
+
 OBJ = ${SRC:%.c=%.o}
+COBJ = ${CASTER_SOURCE:%.c=%.o}
 
 FLAGS = -Wall -Werror -Wextra
 
@@ -15,10 +19,10 @@ COMPILER = gcc
 all: lib $(NAME) 
 
 %.o:%.c
-	$(COMPILER) -c $(FLAGS) $(MLX_INC) $< -o $@
+	@$(COMPILER) -c $(FLAGS) $(MLX_INC) $< -o $@
 
-$(NAME): $(OBJ)
-	$(COMPILER) $(FLAGS)  $(OBJ) -L ./libft -lft $(MLX_LINK) -o $@
+$(NAME): $(OBJ) $(COBJ)
+	@$(COMPILER) $(FLAGS) $(COBJ) $(OBJ) -L ./libft -lft $(MLX_LINK) -o $@
 
 lib:
 	@echo "compiling libft"
@@ -26,7 +30,7 @@ lib:
 	make bonus -C ./libft
 
 clean: libftclean
-	rm -rf $(OBJ)
+	@rm -rf $(OBJ) $(COBJ)
 
 libftclean:
 	make clean -C ./libft
