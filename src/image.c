@@ -3,6 +3,8 @@
 #include "../inc/header.h"
 #include "../inc/map.h"
 
+
+// mlx functions manual : https://qst0.github.io/ft_libgfx/man_mlx_new_image.html
 t_texture *set_texture(void *mlx_ptr, char *path){
   t_texture *texture;
 
