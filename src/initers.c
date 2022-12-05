@@ -2,7 +2,7 @@
 
 void __init_param(t_window *win, t_param *p)
 {
-		p->win = win;
+    p->win = win;
 		p->map = p->data->map;
 		p->dir.x = 0;
 		p->dir.y = -1;
@@ -12,6 +12,17 @@ void __init_param(t_window *win, t_param *p)
 		// this need to be generic
 		p->x = 22;
 		p->y = 11;
+}
+
+void __init_textures(t_param *p, t_mapdata *data){
+  p->north_tx = set_texture(p->win->mlx_ptr, data->north_tx);
+  p->south_tx = set_texture(p->win->mlx_ptr, data->south_tx);
+  p->east_tx = set_texture(p->win->mlx_ptr, data->east_tx);
+  p->west_tx = set_texture(p->win->mlx_ptr, data->west_tx);
+  
+  if (!p->north_tx || !p->south_tx || !p->west_tx || !p->east_tx){
+    exit_log("Textures Not Found !");
+  }
 }
 
 void __init_win(int heigth, int width, t_window *win)

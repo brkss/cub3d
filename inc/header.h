@@ -28,7 +28,6 @@ typedef struct s_vector
 {
 		double x;
 		double y;
-
 }t_vector;
 
 typedef struct s_window
@@ -46,13 +45,30 @@ typedef struct s_window
 
 }t_window;
 
+typedef struct s_texture {
+
+  int height;
+  int width;
+  void *image;
+  void *addr;
+  int bits_per_pixel;
+  int line_length;
+  int endien;
+
+} t_texture;
+
 #ifndef MAP_H
 #include "../inc/map.h"
 #endif
 
 typedef struct param
 {
-		double x;
+		t_texture *north_tx;
+    t_texture *south_tx;
+    t_texture *east_tx;
+    t_texture *west_tx;
+
+    double x;
 		double y;
 		char   	**map;
 
@@ -78,7 +94,7 @@ void __init_param(t_window *win, t_param *p);
 void __init_plane_dir(t_vector *plane,  t_vector *dir);
 void __init_win(int heigth, int width, t_window *win);
 void __inits(t_window *win, t_param *p);
-
+void __init_textures(t_param *p, t_mapdata *data);
 /*------------------- CasterUtils -------------------------*/
 void ray_caster(t_param *p);
 void cast_rays(t_param *p);
@@ -96,5 +112,9 @@ void draw_ceil_floor(int *image, t_mapdata *data);
 
 /*------------------- Other-------------------------*/
 int	create_trgb(int t, int r, int g, int b);
+
+
+
+t_texture *set_texture(void *mlx_ptr, char *path);
 
 #endif

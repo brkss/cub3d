@@ -1,6 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "header.h"
 #include "./libft.h"
 
 # define WEST_TEXTURE 1
@@ -35,4 +36,6 @@ int check_extension(char *filename);
 t_mapdata *scan_scene(t_list *head);
 char **convert_map(t_list *map_chain); 
 int check_map(char **map);
+
+
 #endif
