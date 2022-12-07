@@ -3,10 +3,10 @@ F 100,200,0
 C 0,0,255 
 
 
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./tx/n.xpm
+SO ./tx/s.xpm
+WE ./tx/w.xpm
+EA ./tx/e.xpm
 
 1111111111111111111111111
 1000000000110000000000001
