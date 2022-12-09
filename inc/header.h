@@ -23,7 +23,6 @@
 #define KEY_S 1
 #define KEY_D 2
 
-
 typedef struct s_vector
 {
 		double x;
@@ -46,7 +45,6 @@ typedef struct s_window
 }t_window;
 
 typedef struct s_texture {
-
   int height;
   int width;
   void *image;
@@ -112,8 +110,6 @@ void draw_ceil_floor(int *image, t_mapdata *data);
 
 /*------------------- Other-------------------------*/
 int	create_trgb(int t, int r, int g, int b);
-
-
 
 t_texture *set_texture(void *mlx_ptr, char *path);
 
