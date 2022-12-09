@@ -37,7 +37,7 @@ int main(int ac, char **av)
 		if(!data->west_tx || !data->north_tx
 						|| !data->east_tx || !data->south_tx)
 				exit_log("Invalid Textures !");
-		if(!check_map(data->map))
+		if(!check_map(data))
 				exit_log("Invalid map");
 		// END CHECKING SCENE 
 

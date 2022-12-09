@@ -24,6 +24,9 @@ typedef struct s_mapdata
 		int mapW;
 		char **map;
 
+    int player_x;
+    int player_y;
+
 }t_mapdata;
 
 int check_args(int ac, char **av);
@@ -35,7 +38,7 @@ t_list *read_map(char *filename);
 int check_extension(char *filename);
 t_mapdata *scan_scene(t_list *head);
 char **convert_map(t_list *map_chain); 
-int check_map(char **map);
+int check_map(t_mapdata *data);
 
 
 #endif
