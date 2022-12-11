@@ -121,14 +121,17 @@ int check_map_walls(char **map)
   return (1);
 }
 
-int check_player(char **map)
+int check_player(t_mapdata *data)
 {
   int i;
   int j;
   int player_exist;
+  char **map;
 
-  if(!map)
+
+  if(!data)
     return (0);
+  map = data->map;
   i = 0;
   player_exist = 0;
   while(map[i])
@@ -141,6 +144,8 @@ int check_player(char **map)
       {
         if(player_exist == 1)
           return (0);
+        data->player_x = j;
+        data->player_y = i;
         player_exist = 1;
       }
       else if(map[i][j] == '0' && map[i][j + 1] && map[i][j + 1] == ' ')
@@ -155,9 +160,9 @@ int check_player(char **map)
   return (player_exist);
 }
 
-int check_map(char **map)
+int check_map(t_mapdata *data)
 {
-  if(!check_player(map) || !check_map_walls(map))
+  if(!check_player(data) || !check_map_walls(data->map))
     return (0);
   return (1);
 }

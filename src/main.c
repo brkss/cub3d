@@ -1,4 +1,5 @@
 #include "../inc/header.h"
+
 // doc https://harm-smits.github.io/42docs/libs/minilibx/colors.html#encoding-and-decoding-colors
 int	create_trgb(int t, int r, int g, int b)
 {
@@ -36,13 +37,15 @@ int main(int ac, char **av)
 		if(!data->west_tx || !data->north_tx
 						|| !data->east_tx || !data->south_tx)
 				exit_log("Invalid Textures !");
-		if(!check_map(data->map))
+		if(!check_map(data))
 				exit_log("Invalid map");
 		// END CHECKING SCENE 
 
-		p.data = data;
+    p.data = data;
 		__inits(&win, &p);
-		ray_caster(&p);
+		__init_textures(&p, data);
+    //p.t = set_texture(win.mlx_ptr, "./tx/wall.xpm");
+    ray_caster(&p);
 
 		mlx_hook(win.mlx_win_ptr, 17, 0, (int (*)(void))exit , NULL);
 		mlx_hook(win.mlx_win_ptr, 2, 0L, move, &p);

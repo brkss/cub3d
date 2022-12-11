@@ -61,13 +61,14 @@ void paint(int pixel, int side, double perp_dist, t_param *p)
 		// Dark wall on Y ray collision 
 		if (side)
 				color = 0x572803;
-		dist = p->win->win_higth / perp_dist;
+    dist = p->win->win_higth / perp_dist;
 		dist = dist > p->win->win_higth ? p->win->win_higth : dist;
 		start = (double )(p->win->win_higth - dist) / 2;
 		start = start < 0 ? 0 : start;
-		i = start + dist;
-		while (i >= start)
+		i = start + dist ;
+    while (i >= start){
 			p->win->mlx_win_image[i-- * p->win->win_width + pixel] = color;
+		}
 }
 
 void find_wall(t_vector *delta, t_param *p, int pixel)
