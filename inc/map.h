@@ -24,8 +24,8 @@ typedef struct s_mapdata
 		int mapW;
 		char **map;
 
-    int player_x;
-    int player_y;
+   		int player_x;
+    	int player_y;
 
 }t_mapdata;
 

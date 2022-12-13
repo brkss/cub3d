@@ -8,7 +8,7 @@ int	create_trgb(int t, int r, int g, int b)
 
 double abs_(double x)
 {
-		return (x < 0 ? -x : x) ;
+	return (x < 0 ? -x : x) ;
 }
 
 int main(int ac, char **av)
@@ -39,14 +39,13 @@ int main(int ac, char **av)
 				exit_log("Invalid Textures !");
 		if(!check_map(data))
 				exit_log("Invalid map");
+
 		// END CHECKING SCENE 
 
-    p.data = data;
+		p.data = data;
 		__inits(&win, &p);
 		__init_textures(&p, data);
-    //p.t = set_texture(win.mlx_ptr, "./tx/wall.xpm");
-    ray_caster(&p);
-
+		ray_caster(&p);
 		mlx_hook(win.mlx_win_ptr, 17, 0, (int (*)(void))exit , NULL);
 		mlx_hook(win.mlx_win_ptr, 2, 0L, move, &p);
 		mlx_loop(win.mlx_ptr);

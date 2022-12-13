@@ -31,27 +31,28 @@ typedef struct s_vector
 
 typedef struct s_window
 {
-	void	*mlx_ptr;
-	void	*mlx_win_ptr;
-	void	*image;
-	int 	*mlx_win_image;
-	
-	int  bits_per_pixel;	//	pointer to where the bpp is written;
-	int  size_line	;	//	pointer to where the line is written;
-	int  endian;
-	int	win_width;
-	int	win_higth;
+		void	*mlx_ptr;
+		void	*mlx_win_ptr;
+		void	*image;
+		int 	*mlx_win_image;
+
+		int  bits_per_pixel;	//	pointer to where the bpp is written;
+		int  size_line	;	//	pointer to where the line is written;
+		int  endian;
+		int	win_width;
+		int	win_height;
 
 }t_window;
 
-typedef struct s_texture {
-  int height;
-  int width;
-  void *image;
-  void *addr;
-  int bits_per_pixel;
-  int line_length;
-  int endien;
+typedef struct s_texture
+{
+		int tx_height;
+		int tx_width;
+		void *image;
+		void *addr;
+		int bits_per_pixel;
+		int line_length;
+		int endian;
 
 } t_texture;
 
@@ -61,12 +62,9 @@ typedef struct s_texture {
 
 typedef struct param
 {
-		t_texture *north_tx;
-    t_texture *south_tx;
-    t_texture *east_tx;
-    t_texture *west_tx;
+		t_texture **textures;
 
-    double x;
+		double x;
 		double y;
 		char   	**map;
 
@@ -90,23 +88,21 @@ bool rotate(int key, t_param *p);
 /*------------------- initers -------------------------*/
 void __init_param(t_window *win, t_param *p);
 void __init_plane_dir(t_vector *plane,  t_vector *dir);
-void __init_win(int heigth, int width, t_window *win);
 void __inits(t_window *win, t_param *p);
 void __init_textures(t_param *p, t_mapdata *data);
+void __init_win(t_window *win);
 /*------------------- CasterUtils -------------------------*/
+
 void ray_caster(t_param *p);
 void cast_rays(t_param *p);
-void draw_ceil_floor(int *image, t_mapdata *data);
+void draw_ceil_floor(int *image, t_mapdata *data, t_param *p);
 void find_wall(t_vector *delta, t_param *p, int pixel);
 void get_dist_x_y(double *dist_x, double *dist_y, t_param *p, t_vector *delta, t_vector *step);
 
-
-void __init_win(int heigth, int width, t_window *win);
 void exit_log(char const *err);
 
 /*------------------- Main -------------------------*/
 double abs_(double x);
-void draw_ceil_floor(int *image, t_mapdata *data);
 
 /*------------------- Other-------------------------*/
 int	create_trgb(int t, int r, int g, int b);
