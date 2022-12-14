@@ -30,8 +30,6 @@ typedef struct s_mapdata
 }t_mapdata;
 
 
-int	ft_evil_atoi(const char *str);
-
 int check_args(int ac, char **av);
 char *get_next_line(int fd);
 t_list *read_map(char *filename);

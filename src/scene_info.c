@@ -47,6 +47,28 @@ static int arr_len(char **arr)
   return (len);
 }
 
+int check_color_format(char *color){
+  int i;
+  int count;
+
+  if (!color)
+    return (0);
+  i = 0;
+  count = 0;
+  while(color[i])
+  {
+    if(color[i] == ',')
+        count++;
+    else if((color[i] != ' ' && color[i] != '\t') 
+              && (color[i] < '0' || color[i] > '9'))
+      return(0);
+    i++;  
+  }
+  if(count != 2)
+    return (0);
+  return (1);
+}
+
 int *convert_color(char *color)
 {
 int *res;
@@ -60,24 +82,20 @@ int *res;
   trimmed = ft_strtrim(color, " ");
   if(!trimmed)
     exit_log("Invalid scene");
-  //free(color);
+  if(!check_color_format(trimmed))
+    exit_log("Invalid colors format !");
   colors = ft_split(trimmed, ',');
   if(!colors)
-    exit_log("Invalid scene");
+    exit_log("Invalid colors");
   free(trimmed);
   if(arr_len(colors) < 3)
     exit_log("Invalid colors");
   res = (int *)malloc(sizeof(int) * 3);
   if(!res)
     exit_log(NULL);
-
-  printf("color 0: %s\n", colors[0]);
-  printf("color 1: %s\n", colors[1]);
-  printf("color 2: %s\n", colors[2]);
-  
-  res[0] = ft_evil_atoi(colors[0]);
-  res[1] = ft_evil_atoi(colors[1]);
-  res[2] = ft_evil_atoi(colors[2]);
+  res[0] = ft_atoi(colors[0]);
+  res[1] = ft_atoi(colors[1]);
+  res[2] = ft_atoi(colors[2]);
   if(!check_color_range(res[0]) || !check_color_range(res[1])
       || !check_color_range(res[2]))
     exit_log("Invalid color");

@@ -3,7 +3,7 @@ NAME =  cub3D
 
 CASTER_SOURCE = src/main.c src/moves.c src/initers.c src/caster_utils.c 
 
-SRC = src/check.c src/gnl/get_next_line.c src/gnl/get_next_line_utils.c src/map_reader.c src/scene_info.c src/check_map.c src/exit.c src/image.c src/ft_atoi.c
+SRC = src/check.c src/gnl/get_next_line.c src/gnl/get_next_line_utils.c src/map_reader.c src/scene_info.c src/check_map.c src/exit.c src/image.c
 
 OBJ = ${SRC:%.c=%.o}
 COBJ = ${CASTER_SOURCE:%.c=%.o}
