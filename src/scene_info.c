@@ -60,7 +60,7 @@ int *res;
   trimmed = ft_strtrim(color, " ");
   if(!trimmed)
     exit_log("Invalid scene");
-  free(color);
+  //free(color);
   colors = ft_split(trimmed, ',');
   if(!colors)
     exit_log("Invalid scene");
@@ -70,11 +70,14 @@ int *res;
   res = (int *)malloc(sizeof(int) * 3);
   if(!res)
     exit_log(NULL);
+
+  printf("color 0: %s\n", colors[0]);
+  printf("color 1: %s\n", colors[1]);
+  printf("color 2: %s\n", colors[2]);
   
   res[0] = ft_evil_atoi(colors[0]);
   res[1] = ft_evil_atoi(colors[1]);
   res[2] = ft_evil_atoi(colors[2]);
-  free(color);
   if(!check_color_range(res[0]) || !check_color_range(res[1])
       || !check_color_range(res[2]))
     exit_log("Invalid color");
@@ -95,9 +98,9 @@ void get_color(char *line, t_mapdata *data, int res)
   if(!val)
     return ;
   if(res == CEILLING_COLOR)
-    data->ceilling_color = convert_color(val);
+    data->ceilling_color = convert_color(val + 1);
   else if(res == FLOOR_COLOR)
-    data->floor_color = convert_color(val);
+    data->floor_color = convert_color(val + 1);
   return ;
 }
 
@@ -113,7 +116,6 @@ int is_color(char *line){
     return (FLOOR_COLOR);
   else if(line[i] && line[i] == 'C')
     return (CEILLING_COLOR);
-  
   return (0);
 }
 
