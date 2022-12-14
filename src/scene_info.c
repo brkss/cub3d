@@ -70,9 +70,11 @@ int *res;
   res = (int *)malloc(sizeof(int) * 3);
   if(!res)
     exit_log(NULL);
-  res[0] = ft_atoi(colors[0]);
-  res[1] = ft_atoi(colors[1]);
-  res[2] = ft_atoi(colors[2]);
+  
+  res[0] = ft_evil_atoi(colors[0]);
+  res[1] = ft_evil_atoi(colors[1]);
+  res[2] = ft_evil_atoi(colors[2]);
+  free(color);
   if(!check_color_range(res[0]) || !check_color_range(res[1])
       || !check_color_range(res[2]))
     exit_log("Invalid color");
@@ -82,16 +84,14 @@ int *res;
 void get_color(char *line, t_mapdata *data, int res)
 {
   char *val;
-  int len;
-  int i;
+  //int len;
+  //int i;
 
   if(!line)
     return;
-  len = ft_strlen(line);
-  i = 1;
-  while(line && len > 2 && line[i] == ' ')
-    i++;
-  val = ft_strdup(&line[i]);
+  //len = ft_strlen(line);
+  //i = 1;
+  val = ft_strtrim(line, " ");
   if(!val)
     return ;
   if(res == CEILLING_COLOR)
@@ -99,6 +99,22 @@ void get_color(char *line, t_mapdata *data, int res)
   else if(res == FLOOR_COLOR)
     data->floor_color = convert_color(val);
   return ;
+}
+
+int is_color(char *line){
+  int i;
+  if(!line)
+    return (0);
+  
+  i = 0;
+  while(line[i] && line[i] == ' ')
+    i++;
+  if(line[i] && line[i] == 'F')
+    return (FLOOR_COLOR);
+  else if(line[i] && line[i] == 'C')
+    return (CEILLING_COLOR);
+  
+  return (0);
 }
 
 int is_map_info(char *line)
@@ -113,10 +129,8 @@ int is_map_info(char *line)
     return WEST_TEXTURE;
   else if(line && ft_strlen(line) >= 2 && line[0] == 'E' && line[1] == 'A')
     return EAST_TEXTURE;
-  if(line && ft_strlen(line) >= 1 && line[0] == 'F')
-    return FLOOR_COLOR;
-  if(line && ft_strlen(line) >= 1 && line[0] == 'C')
-    return CEILLING_COLOR;
+  if(line && is_color(line))
+    return  is_color(line);
   return (0);
 }
 
