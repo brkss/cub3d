@@ -3,6 +3,7 @@
 #include "../inc/header.h"
 #include "../inc/map.h"
 
+// [checked]
 int count_map_lines(char *filename){
   int fd;
   char *line;
@@ -13,12 +14,14 @@ int count_map_lines(char *filename){
   line = get_next_line(fd);
   while(line){
     line = get_next_line(fd);
+    free(line);
     line_count++;
   }
   close(fd);
   return (line_count);
 }
 
+// [checked]
 t_list *read_map(char *filename)
 {
   t_list *head;

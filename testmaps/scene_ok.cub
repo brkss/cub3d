@@ -1,7 +1,6 @@
 
-F 100, 200, 0
-
-C 0, 0,                                 255 
+F 100,200,0
+C 0,0,255 
 
 NO ./textures/n.xpm
 SO ./textures/s.xpm

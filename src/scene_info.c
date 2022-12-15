@@ -1,30 +1,30 @@
-
 #include "../inc/header.h"
 #include "../inc/map.h"
 
 void get_texture(char *line, t_mapdata *data, int res)
 {
   char *val;
-  int len;
   int i;
 
   if(!line)
     return;
-  len = ft_strlen(line);
-  i = 2;
-  while(line && len > 2 && line[i] == ' ')
+  i = 0;
+  while(line[i]  && line[i] == ' ')
     i++;
-  val = ft_strdup(&line[i]);
+  i += 2;
+  val = ft_strtrim(&line[i], " ");  
   if(!val)
     return ;
-  if(res == WEST_TEXTURE)
+  if(res == WEST_TEXTURE && !data->west_tx)
     data->west_tx = val;
-  else if(res == NORTH_TEXTURE)
+  else if(res == NORTH_TEXTURE && !data->north_tx)
     data->north_tx = val;
-  else if(res == SOUTH_TEXTURE)
+  else if(res == SOUTH_TEXTURE && !data->south_tx)
     data->south_tx = val;
-  else if(res == EAST_TEXTURE)
+  else if(res == EAST_TEXTURE && !data->east_tx)
     data->east_tx = val;
+  else
+    exit_log("Invalid Data !");
   return ;
 }
 
@@ -137,20 +137,35 @@ int is_color(char *line){
   return (0);
 }
 
+int is_texture(char *line){
+  int i;
+  if(!line)
+    return (0);
+  
+  i = 0;
+  while(line[i] && line[i] == ' ')
+    i++;
+  if(line[i] && line[i + 1] && line[i] == 'N' && line[i + 1] == 'O')
+    return NORTH_TEXTURE;
+  else if(line[i] && line[i + 1] && line[i] == 'S' && line[i + 1] == 'O')
+    return  SOUTH_TEXTURE;
+  else if(line[i] && line[i + 1] && line[i] == 'W' && line[i + 1] == 'E')
+    return WEST_TEXTURE;
+  else if(line[i] && line[i + 1] && line[i] == 'E' && line[i + 1] == 'A')
+    return EAST_TEXTURE;
+  return (0);
+}
+
 int is_map_info(char *line)
 {
   if(line && ft_strlen(line) == 0)
     return EMPTY_LINE;
-  if(line && ft_strlen(line) >= 2 && line[0] == 'N' && line[1] == 'O')
-    return NORTH_TEXTURE;
-  else if(line && ft_strlen(line) >= 2 && line[0] == 'S' && line[1] == 'O')
-    return  SOUTH_TEXTURE;
-  else if(line && ft_strlen(line) >= 2 && line[0] == 'W' && line[1] == 'E')
-    return WEST_TEXTURE;
-  else if(line && ft_strlen(line) >= 2 && line[0] == 'E' && line[1] == 'A')
-    return EAST_TEXTURE;
+  if(line && is_texture(line))
+    return is_texture(line);
   if(line && is_color(line))
     return  is_color(line);
+  printf("is map info returned 0 \n");
+  printf(">>>%s<<<\n", line);
   return (0);
 }
 
@@ -167,14 +182,14 @@ void __init_mapdata(t_mapdata *data)
 
 void get_map(t_mapdata *data, t_list *scene)
 {
-  
   t_list *curr;
 
   if(!data || !scene)
     return;
   curr = scene;
-  while(curr && ft_strlen(curr->content) == 0) 
+  while(curr && ft_strlen(curr->content) == 0){
     curr = curr->next;
+  } 
   data->map = convert_map(curr);
 }
 
@@ -207,6 +222,8 @@ t_mapdata *scan_scene(t_list *head)
       get_texture(curr->content, data, res);
     else if (res == FLOOR_COLOR || res == CEILLING_COLOR)
       get_color(curr->content, data, res);
+    else if(!res)
+      exit_log("Invalid Data !");
     else if(got_all_data(data))
     {
       get_map(data, curr);

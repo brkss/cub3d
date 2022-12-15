@@ -23,14 +23,11 @@ int main(int ac, char **av)
 
 		// START CHECKING SCENE 👀
 		map_fd = check_args(ac, av);
-		if(map_fd == -1 || !check_extension(av[1])){
-				printf("Error: Invalid Map !\n");
-				return (1);
-		}
+		if(map_fd == -1 || !check_extension(av[1]))
+				exit_log("Error: Invalid Map");
 		scene = read_map(av[1]);
-		if(!scene){
-				printf("Error: Invalid Map file");
-		}
+		if(!scene)
+				exit_log("Error: Invalid Map file");
 		data = scan_scene(scene);
 		if(!data)
 				exit_log("Missing data");
@@ -39,7 +36,6 @@ int main(int ac, char **av)
 				exit_log("Invalid Textures !");
 		if(!check_map(data))
 				exit_log("Invalid map");
-
 		// END CHECKING SCENE 
 
 		p.data = data;

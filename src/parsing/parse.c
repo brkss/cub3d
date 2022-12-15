@@ -44,6 +44,22 @@ int check_top_line(char *line, char *bottom){
     return (1);
 }
 
+int check_bottom_line(char *line, char *top){
+    int i;
+
+    if(!line)
+        return (0);
+    i = 0;
+    while(line[i]){
+        if(line[i] == '0') 
+            return (0);
+        else if(line[i] == ' ' && top[i] == '0')
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
 int check_map(char **map)
 {
     

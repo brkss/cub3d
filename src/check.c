@@ -24,7 +24,8 @@ int check_extension(char *filename)
   len = ft_strlen(filename) - 1;
   if (len <= 3)
     return (0);
-  if(filename[len] == 'b' && filename[len - 1] == 'u' && filename[len - 2] == 'c' && filename[len - 3] == '.')
+  if(filename[len] == 'b' && filename[len - 1] == 'u' 
+      && filename[len - 2] == 'c' && filename[len - 3] == '.')
     return (1);
   return (0);
 }

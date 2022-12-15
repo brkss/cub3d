@@ -23,7 +23,7 @@ void __init_textures(t_param *p, t_mapdata *data){
   p->textures[1] = set_texture(p->win->mlx_ptr, data->south_tx);
   p->textures[2] = set_texture(p->win->mlx_ptr, data->east_tx);
   p->textures[3] = set_texture(p->win->mlx_ptr, data->west_tx);
-  
+
   if (! (p->textures[0] && p->textures[1] && p->textures[2] && p->textures[3]))
     exit_log("Textures Not Found !");
 }
