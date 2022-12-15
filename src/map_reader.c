@@ -13,8 +13,8 @@ int count_map_lines(char *filename){
   fd = open(filename, O_RDONLY);
   line = get_next_line(fd);
   while(line){
-    line = get_next_line(fd);
     free(line);
+    line = get_next_line(fd);
     line_count++;
   }
   close(fd);

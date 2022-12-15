@@ -1,6 +1,21 @@
 #include "../inc/header.h"
 #include "../inc/map.h"
 
+void free_doubles(char **str)
+{
+  int i;
+  
+  if(!str)
+    return;
+  i = 0;
+  while(str[i])
+  {
+    free(str[i]);
+    i++;
+  }
+  free(str);
+}
+
 void get_texture(char *line, t_mapdata *data, int res)
 {
   char *val;
@@ -99,26 +114,25 @@ int *res;
   if(!check_color_range(res[0]) || !check_color_range(res[1])
       || !check_color_range(res[2]))
     exit_log("Invalid color");
+  free_doubles(colors);
   return (res);
 }
 
 void get_color(char *line, t_mapdata *data, int res)
 {
   char *val;
-  //int len;
-  //int i;
 
   if(!line)
     return;
-  //len = ft_strlen(line);
-  //i = 1;
   val = ft_strtrim(line, " ");
   if(!val)
     return ;
-  if(res == CEILLING_COLOR)
+  if(res == CEILLING_COLOR && !data->ceilling_color)
     data->ceilling_color = convert_color(val + 1);
-  else if(res == FLOOR_COLOR)
+  else if(res == FLOOR_COLOR && !data->floor_color)
     data->floor_color = convert_color(val + 1);
+  else
+    exit_log("Bad scene file !");
   return ;
 }
 
@@ -164,8 +178,6 @@ int is_map_info(char *line)
     return is_texture(line);
   if(line && is_color(line))
     return  is_color(line);
-  printf("is map info returned 0 \n");
-  printf(">>>%s<<<\n", line);
   return (0);
 }
 
