@@ -10,7 +10,7 @@ char **convert_map(t_list *map_chain)
   int i;
 
   len = ft_lstsize(map_chain);
-  map = (char **)malloc(sizeof(char *) * len + 1);
+  map = (char **)malloc(sizeof(char *) * (len + 1));
   if(!map)
     return (NULL);
   curr = map_chain;
@@ -128,12 +128,11 @@ int check_player(t_mapdata *data)
   int player_exist;
   char **map;
 
-
-  if(!data)
+  if(!data || !data->map)
     return (0);
-  map = data->map;
   i = 0;
   player_exist = 0;
+  map = data->map;
   while(map[i])
   {
     j = 0;
@@ -149,7 +148,7 @@ int check_player(t_mapdata *data)
         player_exist = 1;
       }
       else if(map[i][j] == '0' && map[i][j + 1] && map[i][j + 1] == ' ')
-            return (0);
+        return (0);
       else if(map[i][j] != '1' && map[i][j] != '0' && j > 0
               && (map[i][j - 1] != '1' || map[i][j - 1] != ' '))
         return (0);
@@ -157,6 +156,7 @@ int check_player(t_mapdata *data)
     }
     i++;
   }
+  
   return (player_exist);
 }
 

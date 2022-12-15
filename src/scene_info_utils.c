@@ -3,6 +3,17 @@
 #include "../inc/map.h"
 
 
+void __init_mapdata(t_mapdata *data)
+{
+  data->ceilling_color = NULL;
+  data->floor_color = NULL;
+  data->north_tx = NULL;
+  data->west_tx = NULL;
+  data->south_tx = NULL;
+  data->east_tx = NULL;
+  data->map = NULL;
+}
+
 void free_doubles(char **str)
 {
   int i;

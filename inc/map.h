@@ -35,6 +35,7 @@ void free_doubles(char **str);
 int check_color_range(int color);
 int arr_len(char **arr);
 int check_color_format(char *color);
+void __init_mapdata(t_mapdata *data);
 
 int check_args(int ac, char **av);
 char *get_next_line(int fd);

@@ -1,7 +1,6 @@
 #include "../inc/header.h"
 #include "../inc/map.h"
 
-
 void get_texture(char *line, t_mapdata *data, int res)
 {
   char *val;
@@ -32,12 +31,10 @@ void get_texture(char *line, t_mapdata *data, int res)
 int *convert_color(char *color)
 {
   int *res;
-  int len;
   char *trimmed;
   char **colors;
 
-  len = ft_strlen(color);
-  if(!color || len == 0)
+  if(!color || ft_strlen(color) == 0)
     exit_log(NULL);
   trimmed = ft_strtrim(color, " ");
   if(!trimmed)
@@ -84,9 +81,9 @@ void get_color(char *line, t_mapdata *data, int res)
 
 int is_color(char *line){
   int i;
+  
   if(!line)
     return (0);
-  
   i = 0;
   while(line[i] && line[i] == ' ')
     i++;
@@ -125,17 +122,6 @@ int is_map_info(char *line)
   if(line && is_color(line))
     return  is_color(line);
   return (0);
-}
-
-void __init_mapdata(t_mapdata *data)
-{
-  data->ceilling_color = NULL;
-  data->floor_color = NULL;
-  data->north_tx = NULL;
-  data->west_tx = NULL;
-  data->south_tx = NULL;
-  data->east_tx = NULL;
-  data->map = NULL;
 }
 
 void get_map(t_mapdata *data, t_list *scene)

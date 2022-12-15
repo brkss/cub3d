@@ -38,6 +38,8 @@ int main(int ac, char **av)
 				exit_log("Invalid map");
 		// END CHECKING SCENE 
 
+
+    system("leaks cub3D");
 		p.data = data;
 		__inits(&win, &p);
 		__init_textures(&p, data);
