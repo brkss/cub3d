@@ -12,7 +12,6 @@ t_texture *set_texture(void *mlx_ptr, char *path)
 		texture = (t_texture *)malloc(sizeof(t_texture));
 		if(!texture)
 				return (NULL);
-
 		texture->image = mlx_xpm_file_to_image(mlx_ptr, path,&texture->tx_width, &texture->tx_height);
 		if (!texture->image){
 				free(texture);

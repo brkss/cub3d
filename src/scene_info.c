@@ -1,20 +1,6 @@
 #include "../inc/header.h"
 #include "../inc/map.h"
 
-void free_doubles(char **str)
-{
-  int i;
-  
-  if(!str)
-    return;
-  i = 0;
-  while(str[i])
-  {
-    free(str[i]);
-    i++;
-  }
-  free(str);
-}
 
 void get_texture(char *line, t_mapdata *data, int res)
 {
@@ -43,50 +29,9 @@ void get_texture(char *line, t_mapdata *data, int res)
   return ;
 }
 
-static int check_color_range(int color)
-{
-  if(color >= 0 && color <= 255)
-    return (1);
-  return (0);
-}
-
-static int arr_len(char **arr)
-{
-  int len;
-
-  if(!arr)
-    return (0);
-  len = 0;
-  while(arr[len])
-    len++;
-  return (len);
-}
-
-int check_color_format(char *color){
-  int i;
-  int count;
-
-  if (!color)
-    return (0);
-  i = 0;
-  count = 0;
-  while(color[i])
-  {
-    if(color[i] == ',')
-        count++;
-    else if((color[i] != ' ' && color[i] != '\t') 
-              && (color[i] < '0' || color[i] > '9'))
-      return(0);
-    i++;  
-  }
-  if(count != 2)
-    return (0);
-  return (1);
-}
-
 int *convert_color(char *color)
 {
-int *res;
+  int *res;
   int len;
   char *trimmed;
   char **colors;
@@ -102,7 +47,6 @@ int *res;
   colors = ft_split(trimmed, ',');
   if(!colors)
     exit_log("Invalid colors");
-  free(trimmed);
   if(arr_len(colors) < 3)
     exit_log("Invalid colors");
   res = (int *)malloc(sizeof(int) * 3);
@@ -115,6 +59,7 @@ int *res;
       || !check_color_range(res[2]))
     exit_log("Invalid color");
   free_doubles(colors);
+  free(trimmed);
   return (res);
 }
 
@@ -133,6 +78,7 @@ void get_color(char *line, t_mapdata *data, int res)
     data->floor_color = convert_color(val + 1);
   else
     exit_log("Bad scene file !");
+  free(val);
   return ;
 }
 

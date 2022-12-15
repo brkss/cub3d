@@ -16,9 +16,6 @@ void __init_param(t_window *win, t_param *p)
 
 void __init_textures(t_param *p, t_mapdata *data){
   p->textures = malloc(sizeof(t_texture *) * 4);
-  //p->textures[0] = set_texture(p->win->mlx_ptr, data->north_tx);
-  //p->textures[2] = p->textures[0];
-  //p->textures[3] = p->textures[0];
   p->textures[0] = set_texture(p->win->mlx_ptr, data->north_tx);
   p->textures[1] = set_texture(p->win->mlx_ptr, data->south_tx);
   p->textures[2] = set_texture(p->win->mlx_ptr, data->east_tx);
