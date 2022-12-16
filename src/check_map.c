@@ -6,7 +6,7 @@
 /*   By: bberkass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:39:42 by bberkass          #+#    #+#             */
-/*   Updated: 2022/12/16 17:40:26 by bberkass         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:24:40 by bberkass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,6 @@ char	**convert_map(t_list *map_chain)
 	return (map);
 }
 
-int	ft_arrlen(char **map)
-{
-	int	len;
-
-	if (!map)
-		return (0);
-	len = 0;
-	while (map[len])
-		len++;
-	return (len);
-}
-
 int	check_vertical_walls(char *line)
 {
 	int	i;
@@ -66,22 +54,6 @@ int	check_vertical_walls(char *line)
 		i++;
 	}
 	return (1);
-}
-
-// -- new map parser !
-int	is_player(char c)
-{
-	if (c == 'N' || c == 'W' || c == 'E' || c == 'S')
-		return (1);
-	return (0);
-}
-
-int	is_tile(char c)
-{
-	if (c == '1' || is_player(c) || c == '0'
-		|| c == ' ' || c == '\n' || c == '\0')
-		return (1);
-	return (0);
 }
 
 int	check_tile_env(char *line, char *up, char *down)
