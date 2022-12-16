@@ -39,7 +39,6 @@ int main(int ac, char **av)
 		// END CHECKING SCENE 
 
 
-    system("leaks cub3D");
 		p.data = data;
 		__inits(&win, &p);
 		__init_textures(&p, data);
