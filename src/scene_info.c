@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scene_info.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bberkass <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/16 17:40:09 by bberkass          #+#    #+#             */
+/*   Updated: 2022/12/16 17:40:10 by bberkass         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/header.h"
 #include "../inc/map.h"
 
@@ -28,6 +40,16 @@ void	get_texture(char *line, t_mapdata *data, int res)
 	return ;
 }
 
+void	assign_colors(int *res, char **colors)
+{
+	res[0] = ft_atoi(colors[0]);
+	res[1] = ft_atoi(colors[1]);
+	res[2] = ft_atoi(colors[2]);
+	if (!check_color_range(res[0]) || !check_color_range(res[1])
+		|| !check_color_range(res[2]))
+		exit_log("Invalid color");
+}
+
 int	*convert_color(char *color)
 {
 	int		*res;
@@ -49,12 +71,7 @@ int	*convert_color(char *color)
 	res = (int *)malloc(sizeof(int) * 3);
 	if (!res)
 		exit_log(NULL);
-	res[0] = ft_atoi(colors[0]);
-	res[1] = ft_atoi(colors[1]);
-	res[2] = ft_atoi(colors[2]);
-	if (!check_color_range(res[0]) || !check_color_range(res[1])
-		|| !check_color_range(res[2]))
-		exit_log("Invalid color");
+	assign_colors(res, colors);
 	free_doubles(colors);
 	free(trimmed);
 	return (res);
@@ -154,10 +171,8 @@ t_mapdata	*scan_scene(t_list *head)
 	t_list		*curr;
 	int			res;
 
-	if (!head)
-		return (NULL);
 	data = (t_mapdata *)malloc(sizeof(t_mapdata));
-	if (!data)
+	if (!head || !data)
 		return (NULL);
 	__init_mapdata(data);
 	curr = head;
@@ -172,10 +187,7 @@ t_mapdata	*scan_scene(t_list *head)
 		else if (!res)
 			exit_log("Invalid Data !");
 		else if (got_all_data(data))
-		{
-			get_map(data, curr);
-			return (data);
-		}
+			return (get_map(data, curr));
 		curr = curr->next;
 	}
 	return (NULL);

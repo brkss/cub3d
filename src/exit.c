@@ -1,12 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bberkass <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/16 17:39:54 by bberkass          #+#    #+#             */
+/*   Updated: 2022/12/16 17:40:19 by bberkass         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/header.h"
 
-
-void exit_log(char const *err)
+void	exit_log(char const *err)
 {
-  if(err)
-    printf("Error: %s\n", err);
-  else
-    printf("Error\n");
-  exit(0);
+	if (err)
+		printf("Error: %s\n", err);
+	else
+		printf("Error\n");
+	exit(0);
 }
