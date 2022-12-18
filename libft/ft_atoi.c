@@ -46,7 +46,7 @@ int	ft_atoi(const char *str)
 			}
 		}
 		else
-			break ;
+			return (-1);
 		str++;
 	}
 	return (result * sign);

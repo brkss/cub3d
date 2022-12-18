@@ -1,168 +1,126 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bberkass <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/16 17:39:42 by bberkass          #+#    #+#             */
+/*   Updated: 2022/12/16 19:24:40 by bberkass         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/header.h"
 #include "../inc/map.h"
 
-char **convert_map(t_list *map_chain)
+char	**convert_map(t_list *map_chain)
 {
-  char **map;
-  int len;
-  t_list *curr;
-  int i;
+	char	**map;
+	int		len;
+	t_list	*curr;
+	int		i;
 
-  len = ft_lstsize(map_chain);
-  map = (char **)malloc(sizeof(char *) * len + 1);
-  if(!map)
-    return (NULL);
-  curr = map_chain;
-  i = 0;
-  while(curr)
-  {
-    map[i] = curr->content;
-    i++;
-    curr = curr->next;
-  }
-  return (map);
+	len = ft_lstsize(map_chain);
+	map = (char **)malloc(sizeof(char *) * (len + 1));
+	if (!map)
+		return (NULL);
+	curr = map_chain;
+	i = 0;
+	while (curr)
+	{
+		map[i] = curr->content;
+		i++;
+		curr = curr->next;
+	}
+	return (map);
 }
 
-int ft_arrlen(char **map)
+int	check_vertical_walls(char *line)
 {
-  int len;
+	int	i;
 
-  if(!map)
-    return (0);
-  len = 0;
-  while(map[len])
-    len++;
-  return (len);
+	if (!line)
+		return (0);
+	i = 0;
+	while (line[i] && line[i] == ' ')
+		i++;
+	while (line[i])
+	{
+		if (line[i] != '1' && line[i] != ' ')
+		{
+			printf("vertical lines failed !\n");
+			return (0);
+		}
+		i++;
+	}
+	return (1);
 }
 
-int check_vertical_walls(char *line)
+int	check_tile_env(char *line, char *up, char *down)
 {
-  int i;
-  
-  if(!line)
-    return (0);
-  i = 0;
-  while(line[i])
-  {
-    if(line[i] != '1')
-    {
-      printf("vertical lines failed !\n");
-      return (0);
-    }
-    i++;
-  }
-  return (1);
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!is_tile(line[i]))
+			return (0);
+		if (line[i] == '0' || is_player(line[i]))
+		{
+			if (up[i] == ' ' || up[i] == '\n'
+				|| up[i] == '\0' || down[i] == '\n'
+				|| down[i] == ' ' || down[i] == '\0')
+				return (0);
+		}
+		i++;
+	}
+	return (1);
 }
 
-int check_horizontal_walls(char *line)
+int	check_player(t_mapdata *data, char *line, int y)
 {
-  int len;
+	int	i;
+	int	player_exist;
 
-  if(!line)
-    return(0);
-  len = ft_strlen(line);
-  if(line[0] != '1' || line[len - 1] != '1')
-    return (0);
-  return (1);
+	if (!data)
+		return (0);
+	i = 0;
+	player_exist = 0;
+	while (line[i])
+	{
+		if (is_player(line[i]))
+		{
+			if (player_exist == 1)
+				return (-1);
+			data->player_x = i;
+			data->player_y = y;
+			player_exist = 1;
+		}
+		i++;
+	}
+	return (player_exist);
 }
 
-int check_walls_by_index(char *line, int start, int end)
+int	check_map(t_mapdata *data)
 {
-  int i;
+	int		i;
+	int		player_exist;
+	char	**map;
 
-  i = end - start;
-  while(i < end)
-  {
-    if(line[i] != '1')
-      return (0);
-    i++;
-  }
-  return (1);
-}
-
-int check_shaped_lines(char *curr_line, char *next_line)
-{
-  int curr_len;
-  int next_len;
-
-  curr_len = ft_strlen(curr_line);
-  next_len = ft_strlen(next_line);
-  if(next_len == curr_len)
-    return (1);
-  if(curr_len > next_len
-      && !check_walls_by_index(curr_line, curr_len - next_len, curr_len))
-    return (0);
-  else if(curr_len < next_len
-      && !check_walls_by_index(next_line, next_len - curr_len, next_len))
-      return (0);
-  return (1);
-}
-
-int check_map_walls(char **map)
-{
-  int i;
-  int map_len;
-
-  if(!map)
-    return (0);
-  i = 0;
-  map_len = ft_arrlen(map);
-  while(map[i])
-  {
-    if((i == 0 || i == map_len - 1) && !check_vertical_walls(map[i]))
-      return (0); 
-    else if(!check_horizontal_walls(map[i]))
-      return (0);  
-    if(i < map_len - 1 && !check_shaped_lines(map[i], map[i + 1]))
-      return (0);
-    i++;
-  }
-  return (1);
-}
-
-int check_player(t_mapdata *data)
-{
-  int i;
-  int j;
-  int player_exist;
-  char **map;
-
-
-  if(!data)
-    return (0);
-  map = data->map;
-  i = 0;
-  player_exist = 0;
-  while(map[i])
-  {
-    j = 0;
-    while(map[i][j])
-    {
-      if(map[i][j] == 'N' || map[i][j] == 'W'
-          || map[i][j] == 'E' || map[i][j] == 'S')
-      {
-        if(player_exist == 1)
-          return (0);
-        data->player_x = j;
-        data->player_y = i;
-        player_exist = 1;
-      }
-      else if(map[i][j] == '0' && map[i][j + 1] && map[i][j + 1] == ' ')
-            return (0);
-      else if(map[i][j] != '1' && map[i][j] != '0' && j > 0
-              && (map[i][j - 1] != '1' || map[i][j - 1] != ' '))
-        return (0);
-      j++;
-    }
-    i++;
-  }
-  return (player_exist);
-}
-
-int check_map(t_mapdata *data)
-{
-  if(!check_player(data) || !check_map_walls(data->map))
-    return (0);
-  return (1);
+	i = 0;
+	player_exist = 0;
+	map = data->map;
+	while (map[i])
+	{
+		if ((i == 0 || i == arr_len(map) - 1) && !check_vertical_walls(map[i]))
+			return (0);
+		else if (!check_tile_env(map[i], map[i + 1],
+				map[i - 1]) || player_exist == -1)
+			return (0);
+		else if (!player_exist)
+			player_exist = check_player(data, map[i], i);
+		i++;
+	}
+	printf("player pos [%d, %d]\n", data->player_x, data->player_y);
+	return (player_exist);
 }

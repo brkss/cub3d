@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image.c                                            :+:      :+:    :+:   */
+/*   check_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bberkass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 17:39:57 by bberkass          #+#    #+#             */
-/*   Updated: 2022/12/16 17:40:21 by bberkass         ###   ########.fr       */
+/*   Created: 2022/12/16 19:21:56 by bberkass          #+#    #+#             */
+/*   Updated: 2022/12/16 19:25:24 by bberkass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
 #include "../inc/map.h"
 
-t_texture	*set_texture(void *mlx_ptr, char *path)
+int	ft_arrlen(char **map)
 {
-	t_texture	*texture;
+	int	len;
 
-	texture = (t_texture *)malloc(sizeof(t_texture));
-	if (!texture)
-		return (NULL);
-	texture->image = mlx_xpm_file_to_image(mlx_ptr, path,
-			&texture->tx_width, &texture->tx_height);
-	if (!texture->image)
-	{
-		free(texture);
-		return (NULL);
-	}
-	texture->addr = mlx_get_data_addr(texture->image,
-			&texture->bits_per_pixel, &texture->line_length, &texture->endian);
-	return (texture);
+	if (!map)
+		return (0);
+	len = 0;
+	while (map[len])
+		len++;
+	return (len);
+}
+
+int	is_player(char c)
+{
+	if (c == 'N' || c == 'W' || c == 'E' || c == 'S')
+		return (1);
+	return (0);
+}
+
+int	is_tile(char c)
+{
+	if (c == '1' || is_player(c) || c == '0'
+		|| c == ' ' || c == '\n' || c == '\0')
+		return (1);
+	return (0);
 }
