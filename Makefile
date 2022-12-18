@@ -3,12 +3,12 @@ NAME =  cub3D
 
 CASTER_SOURCE = src/main.c src/moves.c src/initers.c src/caster_utils.c 
 
-SRC = src/check.c src/gnl/get_next_line.c src/gnl/get_next_line_utils.c src/map_reader.c src/scene_info.c src/check_map.c src/exit.c src/image.c src/scene_info_utils.c src/scene_info_validators.c src/check_map_utils.c
+SRC = src/dda.c src/draw.c src/check.c src/gnl/get_next_line.c src/gnl/get_next_line_utils.c src/map_reader.c src/scene_info.c src/check_map.c src/exit.c src/image.c src/scene_info_utils.c src/scene_info_validators.c src/check_map_utils.c
 
 OBJ = ${SRC:%.c=%.o}
 COBJ = ${CASTER_SOURCE:%.c=%.o}
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -fsanitize=address
 
 MLX_INC = -I /usr/X11/include 
 
