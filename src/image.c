@@ -31,3 +31,29 @@ t_texture	*set_texture(void *mlx_ptr, char *path)
 			&texture->bits_per_pixel, &texture->line_length, &texture->endian);
 	return (texture);
 }
+
+int	get_color_from_texture(t_param *p, int tex_id, int x, int y)
+{
+	int		pixel_size;
+	int		img_line_length;
+	char	*color;
+
+	img_line_length = p->textures[tex_id]->line_length;
+	pixel_size = p->textures[tex_id]->bits_per_pixel / 8;
+	color = (char *)p->textures[tex_id]->addr
+		+ (y * img_line_length + x * pixel_size);
+	return (*(int *)color);
+}
+
+int	get_texture_id(int side, t_param *p)
+{
+	if (side == 0 && p->ray->y > 0)
+		return (3);
+	if (side == 0 && p->ray->y < 0)
+		return (2);
+	if (side == 1 && p->ray->x < 0)
+		return (1);
+	if (side == 1 && p->ray->x > 0)
+		return (0);
+	return (-1);
+}

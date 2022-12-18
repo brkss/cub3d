@@ -7,7 +7,9 @@ int	create_trgb(int t, int r, int g, int b)
 
 double	abs_(double x)
 {
-	return (x < 0 ? -x : x);
+	if (x < 0)
+		return (-x);
+	return (x);
 }
 
 int	main(int ac, char **av)
@@ -39,10 +41,4 @@ int	main(int ac, char **av)
 	mlx_hook(win.mlx_win_ptr, 17, 0, (int (*)(void))exit, NULL);
 	mlx_hook(win.mlx_win_ptr, 2, 0L, move, &p);
 	mlx_loop(win.mlx_ptr);
-
-	// draw_ceil_floor(win.mlx_win_image);
-	// mlx_put_image_to_window(win.mlx_ptr, win.mlx_win_ptr, win.image, 0, 0);
-	// mlx_key_hook(win.mlx_win_ptr, move, &p);
-	// mlx_loop_hook(win.mlx_ptr, draw_walls, &p);
-	// mlx_do_key_autorepeaton(win.mlx_ptr);
 }

@@ -97,9 +97,12 @@ void ray_caster(t_param *p);
 void cast_rays(t_param *p);
 void draw_ceil_floor(int *image, t_mapdata *data, t_param *p);
 void find_wall(t_vector *delta, t_param *p, int pixel);
-void get_dist_x_y(double *dist_x, double *dist_y, t_param *p, t_vector *delta, t_vector *step);
+//void get_dist_x_y(double *dist_x, double *dist_y, t_param *p, t_vector *delta, t_vector *step);
+void	get_dist_x_y(double *dist_x_y, t_param *p, t_vector *delta, t_vector *step);
+double	get_wall_x(t_param *p, int side, double perp_dist);
 
 void exit_log(char const *err);
+
 
 /*------------------- Main -------------------------*/
 double abs_(double x);
@@ -107,6 +110,19 @@ double abs_(double x);
 /*------------------- Other-------------------------*/
 int	create_trgb(int t, int r, int g, int b);
 
+
+/*------------------- Image-------------------------*/
 t_texture *set_texture(void *mlx_ptr, char *path);
+int	get_color_from_texture(t_param *p, int tex_id, int x, int y);
+int	get_texture_id(int side, t_param *p);
+
+/*------------------- Draw-------------------------*/
+void	paint(int window_x, int side, double perp_dist, t_param *p);
+void	draw_ceil_floor(int *image, t_mapdata *data, t_param *p);
+
+/*------------------- DDA-------------------------*/
+double	dda_(int gridx, int gridy, t_param *p, t_vector *delta);
+
+
 
 #endif
