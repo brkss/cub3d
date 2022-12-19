@@ -1,5 +1,5 @@
 
-NAME =  cub3d
+NAME =  cub3D
 
 CASTER_SOURCE = src/init_norm.c  src/main.c src/moves.c src/initers.c src/caster_utils.c 
 

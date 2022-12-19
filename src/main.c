@@ -6,7 +6,7 @@
 /*   By: adriouic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:54:23 by adriouic          #+#    #+#             */
-/*   Updated: 2022/12/19 18:54:28 by adriouic         ###   ########.fr       */
+/*   Updated: 2022/12/20 00:24:29 by adriouic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ t_mapdata	*check_(int ac, char **av)
 		exit_log("Invalid Textures !");
 	if (!check_map(data))
 		exit_log("Invalid map");
-	//ft_lstclear(&scene, free);
 	return (data);
 }
 
