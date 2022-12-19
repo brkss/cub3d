@@ -24,10 +24,8 @@ double	abs_(double x)
 	return (x);
 }
 
-int	main(int ac, char **av)
+t_mapdata	*check_(int ac, char **av)
 {
-	t_window	win;
-	t_param		p;
 	int			map_fd;
 	t_list		*scene;
 	t_mapdata	*data;
@@ -46,6 +44,17 @@ int	main(int ac, char **av)
 		exit_log("Invalid Textures !");
 	if (!check_map(data))
 		exit_log("Invalid map");
+	//ft_lstclear(&scene, free);
+	return (data);
+}
+
+int	main(int ac, char **av)
+{
+	t_window	win;
+	t_param		p;
+	t_mapdata	*data;	
+
+	data = check_(ac, av);
 	p.data = data;
 	__inits(&win, &p);
 	__init_textures(&p, data);
