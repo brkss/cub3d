@@ -9,10 +9,10 @@ OBJ = ${SRC:%.c=%.o}
 COBJ = ${CASTER_SOURCE:%.c=%.o}
 
 FLAGS = -Wall -Werror -Wextra 
-MLX_INC = -I /usr/X11/include 
+#MLX_INC = -I /usr/X11/include 
 
-MLX_LINK = -L /usr/X11/lib -lmlx -framework OpenGL -framework  AppKit 
-#MLX_LINK = -lmlx -framework OpenGL -framework  AppKit 
+#MLX_LINK = -L /usr/X11/lib -lmlx -framework OpenGL -framework  AppKit 
+MLX_LINK = -lmlx -framework OpenGL -framework  AppKit 
 
 
 COMPILER = gcc 
@@ -23,7 +23,7 @@ all: lib $(NAME)
 	@$(COMPILER) -c $(FLAGS) $(MLX_INC) $< -o $@
 
 $(NAME): $(OBJ) $(COBJ)
-	@$(COMPILER) $(FLAGS) $(COBJ) $(OBJ) -fsanitize=address -L ./libft -lft $(MLX_LINK) -o $@
+	@$(COMPILER) $(FLAGS) $(COBJ) $(OBJ)  -L ./libft -lft $(MLX_LINK) -o $@
 
 lib:
 	@echo "compiling libft"
@@ -41,6 +41,8 @@ fclean: libftfclean clean
 
 libftfclean:
 	make fclean -C ./libft
+
+bonus: fclean all
 
 re: fclean all
 
