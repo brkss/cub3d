@@ -4,10 +4,12 @@ C 186, 164, 25
 
 
 
-NO ./textures/Texture Metallic11670948645.xpm
-SO ./textures/Texture Metallic21670948646.xpm
-EA ./textures/Texture Metallic31670948646.xpm
-WE ./textures/Texture Metallic41670948646.xpm
+
+NO ./textures/Norht1671484360.xpm
+SO ./textures/South1671484359.xpm
+EA ./textures/east1671484360.xpm
+WE ./textures/west1671484361.xpm
+
 
 1111111111111111111111111
 10000000000110000000000001
