@@ -6,7 +6,7 @@
 /*   By: adriouic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 22:36:46 by adriouic          #+#    #+#             */
-/*   Updated: 2022/12/19 23:26:26 by adriouic         ###   ########.fr       */
+/*   Updated: 2022/12/20 00:28:14 by adriouic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,6 @@ int	move(int key, void *param)
 	if (side_move(key, p) || front_move(key, p) || rotate(key, p))
 		ray_caster(p);
 	if (key == 53)
-		exit(42);
+		exit(0);
 	return (1);
 }
