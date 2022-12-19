@@ -41,10 +41,7 @@ double	get_wall_x(t_param *p, int side, double perp_dist)
 	wall_x = wall_x - (int)wall_x;
 	return (wall_x);
 }
-
-void	find_wall(t_vector *delta, t_param *p, int pixel)
-{
-	int			side;
+void	find_wall(t_vector *delta, t_param *p, int pixel) { int			side;
 	double		dist_;
 
 	side = 0;
@@ -54,6 +51,8 @@ void	find_wall(t_vector *delta, t_param *p, int pixel)
 		side = 1;
 		dist_ = dist_ * -1;
 	}
+	//if (dist_ == 0)
+	//	dist_ = 1.1;
 	paint(pixel, side, dist_, p);
 }
 

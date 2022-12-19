@@ -8,8 +8,8 @@ void	__init_param(t_window *win, t_param *p)
 	p->dir.y = -1;
 	p->plane.x = 0.66;
 	p->plane.y = 0;
-	p->x = p->data->player_x;
-	p->y = p->data->player_y;
+	p->x = p->data->player_x + 0.5;
+	p->y = p->data->player_y + 0.51;
 }
 
 void	__init_textures(t_param *p, t_mapdata *data)
