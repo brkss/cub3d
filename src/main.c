@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adriouic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bberkass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:54:23 by adriouic          #+#    #+#             */
-/*   Updated: 2022/12/19 18:54:28 by adriouic         ###   ########.fr       */
+/*   Updated: 2022/12/20 00:18:04 by bberkass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ t_mapdata	*check_(int ac, char **av)
 
 	map_fd = check_args(ac, av);
 	if (map_fd == -1 || !check_extension(av[1]))
-		exit_log("Error: Invalid Map");
+		exit_log("Invalid Map");
 	scene = read_map(av[1]);
 	if (!scene)
-		exit_log("Error: Invalid Map file");
+		exit_log("Invalid Map file");
 	data = scan_scene(scene);
 	if (!data)
 		exit_log("Missing data");
