@@ -6,7 +6,7 @@
 /*   By: bberkass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:39:42 by bberkass          #+#    #+#             */
-/*   Updated: 2022/12/16 19:24:40 by bberkass         ###   ########.fr       */
+/*   Updated: 2022/12/20 00:14:20 by bberkass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,7 @@ int	check_vertical_walls(char *line)
 	while (line[i])
 	{
 		if (line[i] != '1' && line[i] != ' ')
-		{
-			printf("vertical lines failed !\n");
-			return (0);
-		}
+			exit_log("vertical lines check failed !");
 		i++;
 	}
 	return (1);
@@ -122,6 +119,5 @@ int	check_map(t_mapdata *data)
 			player_exist = check_player(data, map[i], i);
 		i++;
 	}
-	printf("player pos [%d, %d]\n", data->player_x, data->player_y);
 	return (player_exist);
 }

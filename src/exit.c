@@ -6,7 +6,7 @@
 /*   By: bberkass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:39:54 by bberkass          #+#    #+#             */
-/*   Updated: 2022/12/16 17:40:19 by bberkass         ###   ########.fr       */
+/*   Updated: 2022/12/20 00:17:26 by bberkass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	exit_log(char const *err)
 {
 	if (err)
-		printf("Error: %s\n", err);
+		printf("Error\n%s\n", err);
 	else
 		printf("Error\n");
 	exit(0);

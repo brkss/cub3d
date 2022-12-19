@@ -9,10 +9,10 @@ OBJ = ${SRC:%.c=%.o}
 COBJ = ${CASTER_SOURCE:%.c=%.o}
 
 FLAGS = -Wall -Werror -Wextra 
-#MLX_INC = -I /usr/X11/include 
+MLX_INC = -I /usr/X11/include 
 
-#MLX_LINK = -L /usr/X11/lib -lmlx -framework OpenGL -framework  AppKit 
-MLX_LINK = -lmlx -framework OpenGL -framework  AppKit 
+MLX_LINK = -L /usr/X11/lib -lmlx -framework OpenGL -framework  AppKit 
+#MLX_LINK = -lmlx -framework OpenGL -framework  AppKit 
 
 
 COMPILER = gcc 
