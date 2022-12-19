@@ -92,5 +92,8 @@ int	move(int key, void *param)
 	p = (t_param *) param;
 	if (side_move(key, p) || front_move(key, p) || rotate(key, p))
 		ray_caster(p);
+	if (key == 53)
+		exit(42);
+		
 	return (1);
 }
