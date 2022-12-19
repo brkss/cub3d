@@ -6,7 +6,7 @@
 /*   By: bberkass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:39:57 by bberkass          #+#    #+#             */
-/*   Updated: 2022/12/16 17:40:21 by bberkass         ###   ########.fr       */
+/*   Updated: 2022/12/19 21:59:47 by adriouic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ int	get_color_from_texture(t_param *p, int tex_id, int x, int y)
 int	get_texture_id(int side, t_param *p)
 {
 	if (side == 0 && p->ray->y > 0)
-		return (3);
-	if (side == 0 && p->ray->y < 0)
-		return (2);
-	if (side == 1 && p->ray->x < 0)
 		return (1);
-	if (side == 1 && p->ray->x > 0)
+	if (side == 0 && p->ray->y < 0)
 		return (0);
+	if (side == 1 && p->ray->x < 0)
+		return (3);
+	if (side == 1 && p->ray->x > 0)
+		return (2);
 	return (-1);
 }

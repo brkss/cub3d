@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adriouic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/19 18:54:50 by adriouic          #+#    #+#             */
+/*   Updated: 2022/12/19 18:55:17 by adriouic         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/header.h"
 
 void	draw_ceil_floor(int *image, t_mapdata *data, t_param *p)
@@ -45,7 +57,6 @@ void	paint(int window_x, int side, double perp_dist, t_param *p)
 	i = start;
 	while (i < (start + perp_dist))
 	{
-		//printf("%f %f\n", wall_x, wall_y)
 		wall_y = ((double)(i - start) / perp_dist)
 			* (double)p->textures[textutre_id]->tx_height;
 		p->win->mlx_win_image[i * p->win->win_width + window_x]

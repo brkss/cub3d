@@ -1,13 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initers.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adriouic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/19 18:54:37 by adriouic          #+#    #+#             */
+/*   Updated: 2022/12/19 22:31:05 by adriouic         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/header.h"
 
 void	__init_param(t_window *win, t_param *p)
 {
 	p->win = win;
 	p->map = p->data->map;
-	p->dir.x = 0;
-	p->dir.y = -1;
-	p->plane.x = 0.66;
-	p->plane.y = 0;
+	__init_player_dir(p);
 	p->x = p->data->player_x + 0.5;
 	p->y = p->data->player_y + 0.51;
 }

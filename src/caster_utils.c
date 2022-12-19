@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   caster_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adriouic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/19 18:55:53 by adriouic          #+#    #+#             */
+/*   Updated: 2022/12/19 18:56:28 by adriouic         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/header.h"
 
 void	get_dist_x_y(double *dist_x_y, t_param *p,
@@ -41,7 +53,10 @@ double	get_wall_x(t_param *p, int side, double perp_dist)
 	wall_x = wall_x - (int)wall_x;
 	return (wall_x);
 }
-void	find_wall(t_vector *delta, t_param *p, int pixel) { int			side;
+
+void	find_wall(t_vector *delta, t_param *p, int pixel)
+{	
+	int			side;
 	double		dist_;
 
 	side = 0;
@@ -51,8 +66,6 @@ void	find_wall(t_vector *delta, t_param *p, int pixel) { int			side;
 		side = 1;
 		dist_ = dist_ * -1;
 	}
-	//if (dist_ == 0)
-	//	dist_ = 1.1;
 	paint(pixel, side, dist_, p);
 }
 
