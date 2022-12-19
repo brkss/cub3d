@@ -91,6 +91,8 @@ void __init_plane_dir(t_vector *plane,  t_vector *dir);
 void __inits(t_window *win, t_param *p);
 void __init_textures(t_param *p, t_mapdata *data);
 void __init_win(t_window *win);
+void	__init_player_dir(t_param *p);
+
 /*------------------- CasterUtils -------------------------*/
 
 void ray_caster(t_param *p);
