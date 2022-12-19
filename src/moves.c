@@ -6,7 +6,7 @@
 /*   By: adriouic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 22:36:46 by adriouic          #+#    #+#             */
-/*   Updated: 2022/12/19 22:36:50 by adriouic         ###   ########.fr       */
+/*   Updated: 2022/12/19 23:26:26 by adriouic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	rotate(int key, t_param *p)
 	double	tmp;
 
 	r_speed = 0.14;
-	if (key == RIGHT)
+	if (key == LEFT)
 	{
 		tmp = p->dir.x;
 		p->dir.x = p->dir.x * cos(r_speed) - p->dir.y * sin(r_speed);
@@ -27,7 +27,7 @@ bool	rotate(int key, t_param *p)
 		p->plane.x = p->plane.x * cos(r_speed) - p->plane.y * sin(r_speed);
 		p->plane.y = tmp * sin(r_speed) + p->plane.y * cos(r_speed);
 	}
-	else if (key == LEFT)
+	else if (key == RIGHT)
 	{
 		tmp = p->dir.x;
 		p->dir.x = p->dir.x * cos(-r_speed) - p->dir.y * sin(-r_speed);
