@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bberkass <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/19 18:54:23 by adriouic          #+#    #+#             */
-/*   Updated: 2022/12/20 00:18:04 by bberkass         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../inc/header.h"
 
@@ -44,7 +33,6 @@ t_mapdata	*check_(int ac, char **av)
 		exit_log("Invalid Textures !");
 	if (!check_map(data))
 		exit_log("Invalid map");
-	//ft_lstclear(&scene, free);
 	return (data);
 }
 

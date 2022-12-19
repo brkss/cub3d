@@ -6,7 +6,7 @@
 /*   By: adriouic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 22:34:59 by adriouic          #+#    #+#             */
-/*   Updated: 2022/12/19 23:18:36 by adriouic         ###   ########.fr       */
+/*   Updated: 2022/12/20 00:24:16 by adriouic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/header.h"
@@ -47,7 +47,6 @@ void	__init_west_east(t_param *p, char face)
 		p->dir.y = 0;
 		p->plane.x = 0;
 		p->plane.y = 0.66;
-
 	}
 }
 
