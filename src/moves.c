@@ -5,7 +5,7 @@ bool	rotate(int key, t_param *p)
 	double	r_speed;
 	double	tmp;
 
-	r_speed = 0.24;
+	r_speed = 0.14;
 	if (key == RIGHT)
 	{
 		tmp = p->dir.x;
@@ -33,20 +33,24 @@ bool	side_move(int key, t_param *p)
 {
 	double	m_speed;
 
-	m_speed = 0.34;
+	m_speed = 0.21;
 	if (key == KEY_A)
 	{
-		if (p->map[(int)(p->y - p->plane.y * m_speed)][(int)p->x] == '0')
+		if (p->map[(int)(p->y - p->plane.y * m_speed)]
+				[(int)(p->x - p->plane.x * m_speed)] == '0')
+		{
 			p->y -= p->plane.y * m_speed;
-		if (p->map[(int)p->y][(int)(p->x - p->plane.x * m_speed)] == '0')
 			p->x -= p->plane.x * m_speed;
+		}
 	}
 	else if (key == KEY_D)
 	{
-		if (p->map[(int)(p->y + p->plane.y * m_speed)][(int)p->x] == '0')
-				p->y += p->plane.y * m_speed;
-		if (p->map[(int)p->y][(int)(p->x + p->plane.x * m_speed)] == '0')
-				p->x += p->plane.x * m_speed;
+		if (p->map[(int)(p->y + p->plane.y * m_speed)]
+				[(int)(p->x + p->plane.x * m_speed)] == '0')
+		{
+			p->y += p->plane.y * m_speed;
+			p->x += p->plane.x * m_speed;
+		}
 	}
 	else
 		return (0);
@@ -57,20 +61,24 @@ bool	front_move(int key, t_param *p)
 {
 	double	m_speed;
 
-	m_speed = 0.12;
+	m_speed = 0.52;
 	if (key == KEY_W)
 	{
-		if (p->map[(int)(p->y + p->dir.y * m_speed)][(int)p->x] == '0')
-			p->y += p->dir.y * m_speed;
-		if (p->map[(int)p->y][(int)(p->x + p->dir.x * m_speed)] == '0')
-			p->x += p->dir.x * m_speed;
+		if (p->map[(int)(p->y + p->dir.y * m_speed)]
+				[(int)(p->x + p->dir.x * m_speed)] == '0')
+		{
+			p->x += (p->dir.x * m_speed);
+			p->y += (p->dir.y * m_speed);
+		}
 	}
 	else if (key == KEY_S)
 	{
-		if (p->map[(int)(p->y - p->dir.y * m_speed)][(int)p->x] == '0')
-			p->y -= p->dir.y * m_speed;
-		if (p->map[(int)p->y][(int)(p->x - p->dir.x * m_speed)] == '0')
+		if (p->map[(int)(p->y - p->dir.y * m_speed)]
+				[(int)(p->x - p->dir.x * m_speed)] == '0')
+		{
 			p->x -= p->dir.x * m_speed;
+			p->y -= p->dir.y * m_speed;
+		}
 	}
 	else
 		return (0);

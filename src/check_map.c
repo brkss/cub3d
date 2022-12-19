@@ -32,6 +32,7 @@ char	**convert_map(t_list *map_chain)
 		i++;
 		curr = curr->next;
 	}
+	map[i] = NULL;
 	return (map);
 }
 
