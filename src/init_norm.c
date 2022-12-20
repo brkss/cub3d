@@ -57,4 +57,5 @@ void	__init_player_dir(t_param *p)
 	face = p->map[p->data->player_y][p->data->player_x];
 	if (!__init_north_south(p, face))
 		__init_west_east(p, face);
+	p->map[p->data->player_y][p->data->player_x] = '0';
 }

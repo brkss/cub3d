@@ -73,14 +73,14 @@ bool	front_move(int key, t_param *p)
 {
 	double	m_speed;
 
-	m_speed = 0.52;
+	m_speed = 0.62;
 	if (key == KEY_W)
 	{
 		if (p->map[(int)(p->y + p->dir.y * m_speed)]
 				[(int)(p->x + p->dir.x * m_speed)] == '0')
 		{
-			p->x += (p->dir.x * m_speed);
-			p->y += (p->dir.y * m_speed);
+			p->x += (p->dir.x * m_speed / 2);
+			p->y += (p->dir.y * m_speed / 2);
 		}
 	}
 	else if (key == KEY_S)
